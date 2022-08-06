@@ -1,5 +1,6 @@
 import 'package:apdcl_meter_registry_system/pages/home_page.dart';
 import 'package:apdcl_meter_registry_system/pages/login_pages.dart';
+import 'package:apdcl_meter_registry_system/utils/routes.dart';
 
 import 'package:apdcl_meter_registry_system/widgets/themes.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +24,12 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.lightTheme(context),
       darkTheme: MyTheme.darkTheme(context),
     
-
+      initialRoute: "/",
 
       routes:{
-        "/":(context)=> LoginPage()
+        "/":(context)=> LoginPage(),
+        MyRoutes.homeRoute:(context) => HomePage(),
+        MyRoutes.loginRoute:(context) => LoginPage(),
         
       }
       

@@ -1,3 +1,4 @@
+import 'package:apdcl_meter_registry_system/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -64,12 +65,15 @@ class LoginPage extends StatelessWidget {
               ),
 
               SizedBox(
-              height: 20,
+              height: 40,
               ),
 
               ElevatedButton(
-                onPressed: (){}, 
-                child: Text("Login")
+                onPressed: (){
+                  Navigator.pushNamed(context, MyRoutes.homeRoute);
+                }, 
+                child: Text("Login"),
+                style: TextButton.styleFrom(minimumSize: Size(130, 40)),
               )
             ],
            ),
