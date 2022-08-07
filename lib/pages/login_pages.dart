@@ -12,6 +12,20 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String name="";
   bool changedButton=false;
+  final _formKey=GlobalKey<FormState>();
+  moveToHome(BuildContext context)async{
+    if(_formKey.currentState!.validate()){
+    setState(() {
+        changedButton=true;
+    });
+    await Future.delayed(Duration(seconds:1));
+    await Navigator.pushNamed(context, MyRoutes.homeRoute);
+        
+    setState(() {
+        changedButton=false;
+    });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     
@@ -19,124 +33,154 @@ class _LoginPageState extends State<LoginPage> {
 
         backgroundColor: Color.fromARGB(255, 219, 241, 246),
         
+        
         appBar: AppBar(
          backgroundColor: Color.fromARGB(255, 243, 118, 35),
          title:Text("Login") 
         ),
        
-        body:Column(
-             
-          children: [
-            
-                    
-            Image.asset(
+        body:Form(
+          key: _formKey,
+
+          child: Column(
+               
+            children: [
               
-              "assets/images/APDCL.png",
-              
-              color: const Color.fromRGBO(255, 255, 255, 0.7),
-              colorBlendMode: BlendMode.modulate,
-              fit: BoxFit.contain,
-              
-            ),
-
-            SizedBox(
-              height: 36,
-            ),
-
-            Text("Welcome $name",style:TextStyle(
-                fontSize:25,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 6, 141, 175),
-              )),
-
-
-              SizedBox(
-              height: 10,
-            ),
-
-
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 35),
-              child: Column(
-                children: [
-                  TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Enter Username",
-                  labelText: "Username",
-                  
-                
-                ),
-                
-                onChanged: (value){
-                  name=value;
-                  
-                  //setState--->calls the build method once again(i.e UI is created again)
-                  setState(() {});
-
-                }
-              ),
-              
-              TextFormField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  hintText: "Enter Password",
-                  labelText: "Password",
-                  
-                ),
-              ),
-
-              SizedBox(
-              height: 40,
-              ),
-
-
-              InkWell(
-                onTap: ()async {
-                  setState(() {
-                    changedButton=true;
-                  });
-                  await Future.delayed(Duration(seconds:1));
-                 Navigator.pushNamed(context, MyRoutes.homeRoute);
-                },
-                child: AnimatedContainer(
-                  duration: Duration(seconds:1),
-                  height: 50,
-                  width: changedButton?50:130,
-                  
-                  alignment: Alignment.center,
-                  child: changedButton?Icon(
-                    Icons.done,
-                    color:Colors.white,
-                  )
-                  :Text("Login",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
                       
+              Image.asset(
+                
+                "assets/images/APDCL.png",
+                
+                color: const Color.fromRGBO(255, 255, 255, 0.7),
+                colorBlendMode: BlendMode.modulate,
+                fit: BoxFit.contain,
+                
+              ),
+        
+              SizedBox(
+                height: 36,
+              ),
+        
+              Text("Welcome $name",style:TextStyle(
+                  fontSize:25,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 6, 141, 175),
+                )),
+        
+        
+                SizedBox(
+                height: 10,
+              ),
+        
+        
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 35),
+                child: Column(
+                  children: [
+                    TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Enter Username",
+                    labelText: "Username",
+                    
+                  
+                  ),
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Username cannot be empty";
+                    }
+                    return null;
+                  },
+                  
+                  onChanged: (value){
+                    name=value;
+                    
+                    //setState--->calls the build method once again(i.e UI is created again)
+                    setState(() {});
+        
+                  }
+                ),
+                
+                TextFormField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: "Enter Password",
+                    labelText: "Password",
+                    
+                  ),
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return "Password cannot be empty";
+                    }
+                    else if(value.length<6){
+                      return "Password should be of atleast 6 characters";
+                    }
+                    return null;
+                  },
+                ),
+        
+                SizedBox(
+                height: 40,
+                ),
+        
+        
+                Material(
+                  color: Color.fromARGB(255, 243, 118, 35),
+                  borderRadius: BorderRadius.circular(changedButton?50:8),
+                  child: InkWell(
+                    splashColor: Color.fromARGB(255, 131, 252, 1),
+                    onTap: ()=>moveToHome(context),
+                      
+                    
+                    child: AnimatedContainer(
+                      duration: Duration(seconds:1),
+                      height: 50,
+                      width: changedButton?50:130,
+                      
+                      alignment: Alignment.center,
+                      child: changedButton?Icon(
+                        Icons.done,
+                        color:Colors.white,
+                      )
+                      :Text("Login",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          
+                        ),
+                      ),
+                      
+                      /* decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 243, 118, 35),
+                        borderRadius: BorderRadius.circular(changedButton?50:8),
+                      ), */
                     ),
                   ),
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 243, 118, 35),
-                    borderRadius: BorderRadius.circular(changedButton?50:8),
-                  ),
                 ),
-              )
+        
+                SizedBox(
+                  height: 20,
+                ),
+        
+                
+        
+        
+                
+        
+               /*  ElevatedButton(
+                  onPressed: (){
+                    Navigator.pushNamed(context, MyRoutes.homeRoute);
+                  }, 
+                  child: Text("Login"),
+                  style: TextButton.styleFrom(minimumSize: Size(130, 40)),
+                )  */
+              ],
+             ),
+            )
               
-
-             /*  ElevatedButton(
-                onPressed: (){
-                  Navigator.pushNamed(context, MyRoutes.homeRoute);
-                }, 
-                child: Text("Login"),
-                style: TextButton.styleFrom(minimumSize: Size(130, 40)),
-              )  */
+              
             ],
-           ),
-          )
-            
-            
-          ],
+          ),
         ),
 
         drawer: Drawer(),
