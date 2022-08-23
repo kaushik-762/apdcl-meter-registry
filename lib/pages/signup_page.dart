@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
         
         appBar: AppBar(
          backgroundColor: Color.fromARGB(255, 243, 118, 35),
-         title:Text("Login",style: TextStyle(
+         title:Text("Sign Up",style: TextStyle(
           color: Colors.black,
          ),), 
         ),

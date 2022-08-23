@@ -8,6 +8,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 243, 118, 35),
         title: Text("APDCL",
           style: TextStyle(
             
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
         style: TextStyle(
           fontSize: 30,
           fontWeight: FontWeight.bold,
-          color: Colors.orange,
+          color: Color.fromARGB(255, 234, 92, 22),
         ),
         
         ),
