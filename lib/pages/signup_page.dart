@@ -1,16 +1,16 @@
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUp> createState() => _SignUpState();
 }
-   //"_"-->Underscore makes it private
-class _LoginPageState extends State<LoginPage> {
-  String name="";
+
+class _SignUpState extends State<SignUp> {
+
+  
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
   moveToHome(BuildContext context)async{
@@ -28,18 +28,18 @@ class _LoginPageState extends State<LoginPage> {
   }
   @override
   Widget build(BuildContext context) {
-    
-    return Scaffold(
+
+         return Scaffold(
 
         backgroundColor: Color.fromARGB(255, 205, 237, 244),
         
         
-        appBar: AppBar(
+       /*  appBar: AppBar(
          backgroundColor: Color.fromARGB(255, 243, 118, 35),
-         title:Text("Sign Up",style: TextStyle(
+         title:Text("Login",style: TextStyle(
           color: Colors.black,
          ),), 
-        ),
+        ), */
 
 
        
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
                SizedBox(
-                height: 40,
+                height: 160,
               ),
               
                       
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 30,
               ),
         
-              Text("Welcome $name",style:TextStyle(
+              Text("Welcome ",style:TextStyle(
                   fontSize:25,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 65, 91, 236),
@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   
                   onChanged: (value){
-                    name=value;
+                   
                     
                     //setState--->calls the build method once again(i.e UI is created again)
                     setState(() {});
@@ -204,9 +204,8 @@ class _LoginPageState extends State<LoginPage> {
       ), */
 
     );
-  
-      
-  
+
+    
     
   }
 }

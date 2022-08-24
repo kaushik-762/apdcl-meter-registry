@@ -29,6 +29,7 @@ class _SplashState extends State<Splash> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 205, 237, 244),
       body:Center(
         child: CircleAvatar(
           backgroundImage: AssetImage("assets/images/APDCLLOGO1.jpeg"),

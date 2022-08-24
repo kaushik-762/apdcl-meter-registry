@@ -2,6 +2,17 @@ import 'package:apdcl_meter_registry_system/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+
+Widget buildForgotPassword(){
+
+  return Container(
+    alignment: Alignment.centerRight,
+    
+
+  );
+
+}
+
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -34,25 +45,30 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Color.fromARGB(255, 205, 237, 244),
         
         
-        appBar: AppBar(
+       /*  appBar: AppBar(
          backgroundColor: Color.fromARGB(255, 243, 118, 35),
          title:Text("Login",style: TextStyle(
           color: Colors.black,
          ),), 
-        ),
+        ), */
 
 
        
         body:Form(
           key: _formKey,
-
-          child: Column(
+        
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+              horizontal:25,
+              vertical:120,
+            ),
+            child: Column(
                
             children: [
 
 
                SizedBox(
-                height: 40,
+                height: 50,
               ),
               
                       
@@ -67,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 30,
               ),
         
-              Text("Welcome $name",style:TextStyle(
+              Text("APDCL",style:TextStyle(
                   fontSize:25,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 65, 91, 236),
@@ -80,11 +96,18 @@ class _LoginPageState extends State<LoginPage> {
         
         
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 35),
+                padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 30),
                 child: Column(
                   children: [
                     TextFormField(
-                  decoration: InputDecoration(
+                    decoration: InputDecoration(
+
+                    //border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    prefixIcon: Icon(
+                     Icons.email,
+                     color: Color.fromARGB(255, 243, 118, 35),
+                    ),
                     hintText: "Enter Username",
                     labelText: "Username",
                     
@@ -97,18 +120,26 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                   
-                  onChanged: (value){
+                  /* onChanged: (value){
                     name=value;
                     
                     //setState--->calls the build method once again(i.e UI is created again)
                     setState(() {});
         
-                  }
+                  } */
                 ),
+
+                
                 
                 TextFormField(
                   obscureText: true,
                   decoration: InputDecoration(
+                    //border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    prefixIcon: Icon(
+                     Icons.lock,
+                     color: Color.fromARGB(255, 243, 118, 35),
+                    ),
                     hintText: "Enter Password",
                     labelText: "Password",
                     
@@ -122,6 +153,28 @@ class _LoginPageState extends State<LoginPage> {
                     }
                     return null;
                   },
+                ),
+
+
+                        
+                SizedBox(
+                  height: 10,
+                ),
+
+
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    
+                    onTap: ()=>moveToHome(context),
+                    child: Text("Forgot Password?",
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                      
+                    ),
+                    ),
+                  ),
                 ),
         
                 SizedBox(
@@ -163,10 +216,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-        
-                SizedBox(
-                  height: 20,
-                ),
+
+
+
+
         
                 
         
@@ -187,9 +240,10 @@ class _LoginPageState extends State<LoginPage> {
               
             ],
           ),
+          ),
         ),
 
-        drawer: Drawer(),
+        
 
 
      /*  child: Container(
