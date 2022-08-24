@@ -37,6 +37,16 @@ class _LoginPageState extends State<LoginPage> {
     });
     }
   }
+
+  moveToSignUp(BuildContext context)async{
+    
+    
+    await Future.delayed(Duration(seconds:1));
+    await Navigator.pushNamed(context, MyRoutes.signRoute);
+        
+    
+    
+  }
   @override
   Widget build(BuildContext context) {
     
@@ -60,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
               horizontal:25,
-              vertical:120,
+              vertical:0,
             ),
             child: Column(
                
@@ -68,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
                SizedBox(
-                height: 50,
+                height: 200,
               ),
               
                       
@@ -222,7 +232,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 GestureDetector(
-                  onTap: () => moveToHome(context),
+                  onTap: () => moveToSignUp(context),
                   child: RichText(
                     text:TextSpan(
                       children:[ 

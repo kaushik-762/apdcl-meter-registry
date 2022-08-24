@@ -1,5 +1,6 @@
 import 'package:apdcl_meter_registry_system/pages/home_page.dart';
 import 'package:apdcl_meter_registry_system/pages/login_pages.dart';
+import 'package:apdcl_meter_registry_system/pages/signup_page.dart';
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
 import 'package:apdcl_meter_registry_system/widgets/splash.dart';
 
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         "/":(context)=> Splash(),
         MyRoutes.homeRoute:(context) => HomePage(),
         MyRoutes.loginRoute:(context) => LoginPage(),
-        
+        MyRoutes.signRoute:(context) => SignUp(),
       }
       
 

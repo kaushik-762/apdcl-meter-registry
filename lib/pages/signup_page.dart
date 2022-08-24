@@ -46,146 +46,202 @@ class _SignUpState extends State<SignUp> {
         body:Form(
           key: _formKey,
 
-          child: Column(
-               
-            children: [
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(
+              horizontal:25,
+              vertical:0,
+            ),
 
+            child: Column(
+                 
+              children: [
+          
+          
+                 SizedBox(
+                  height: 200,
+                ),
+                
+                        
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage("assets/images/APDCLLOGO1.jpeg") ,
+                  
+                  
+               ),
+                  
+                SizedBox(
+                  height: 15,
+                ),
+                  
+                Text("APDCL ",style:TextStyle(
+                    fontSize:25,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 65, 91, 236),
+                  )),
+                  
+                  
+                  SizedBox(
+                  height: 10,
+                ),
+                  
+                  
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 35),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    prefixIcon: Icon(
+                     Icons.face,
+                     color: Color.fromARGB(255, 243, 118, 35),
+                    ),
+                      
+                      hintText: "Enter Username",
+                      labelText: "Name",
+                      
+                    
+                    ),
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "Username cannot be empty";
+                      }
+                      return null;
+                    },
+                    
+                   /*  onChanged: (value){
+                     
+                      
+                      //setState--->calls the build method once again(i.e UI is created again)
+                      setState(() {});
+                  
+                    } */
+                  ),
 
-               SizedBox(
-                height: 160,
-              ),
-              
-                      
-              CircleAvatar(
-                radius: 70,
-                backgroundImage: AssetImage("assets/images/APDCLLOGO1.jpeg") ,
-                
-                
-             ),
-        
-              SizedBox(
-                height: 30,
-              ),
-        
-              Text("Welcome ",style:TextStyle(
-                  fontSize:25,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 65, 91, 236),
-                )),
-        
-        
-                SizedBox(
-                height: 10,
-              ),
-        
-        
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 35),
-                child: Column(
-                  children: [
-                    TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "Enter Username",
-                    labelText: "Username",
-                    
-                  
+                  SizedBox(
+                    height: 10,
                   ),
-                  validator: (value) {
-                    if(value!.isEmpty){
-                      return "Username cannot be empty";
-                    }
-                    return null;
-                  },
+
+                  TextFormField(
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    prefixIcon: Icon(
+                     Icons.email,
+                     color: Color.fromARGB(255, 243, 118, 35),
+                    ),
+                      hintText: "Enter Email",
+                      labelText: "Email",
+                      
+                    
+                    ),
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "Email cannot be empty";
+                      }
+                      return null;
+                    },
+                    
+                    onChanged: (value){
+                     
+                      
+                      //setState--->calls the build method once again(i.e UI is created again)
+                      setState(() {});
                   
-                  onChanged: (value){
-                   
-                    
-                    //setState--->calls the build method once again(i.e UI is created again)
-                    setState(() {});
-        
-                  }
-                ),
-                
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: "Enter Password",
-                    labelText: "Password",
-                    
+                    }
                   ),
-                  validator: (value) {
-                    if(value!.isEmpty){
-                      return "Password cannot be empty";
-                    }
-                    else if(value.length<6){
-                      return "Password should be of atleast 6 characters";
-                    }
-                    return null;
-                  },
-                ),
-        
-                SizedBox(
-                height: 40,
-                ),
-        
-        
-                Material(
-                  color: Color.fromARGB(255, 243, 118, 35),
-                  borderRadius: BorderRadius.circular(changedButton?50:8),
-                  child: InkWell(
-                    splashColor: Color.fromARGB(255, 131, 252, 1),
-                    onTap: ()=>moveToHome(context),
+
+                  SizedBox(
+                    height: 10,
+                  ),
+
+                  
+                  TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+
+                    contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    prefixIcon: Icon(
+                     Icons.lock,
+                     color: Color.fromARGB(255, 243, 118, 35),
+                    ),
+                      hintText: "Enter Password",
+                      labelText: "Password",
                       
-                    
-                    child: AnimatedContainer(
-                      duration: Duration(seconds:1),
-                      height: 50,
-                      width: changedButton?50:130,
+                    ),
+                    validator: (value) {
+                      if(value!.isEmpty){
+                        return "Password cannot be empty";
+                      }
+                      else if(value.length<6){
+                        return "Password should be of atleast 6 characters";
+                      }
+                      return null;
+                    },
+                  ),
+                  
+                  SizedBox(
+                  height: 40,
+                  ),
+                  
+                  
+                  Material(
+                    color: Color.fromARGB(255, 243, 118, 35),
+                    borderRadius: BorderRadius.circular(changedButton?50:8),
+                    child: InkWell(
+                      splashColor: Color.fromARGB(255, 131, 252, 1),
+                      onTap: ()=>moveToHome(context),
+                        
                       
-                      alignment: Alignment.center,
-                      child: changedButton?Icon(
-                        Icons.done,
-                        color:Colors.white,
-                      )
-                      :Text("Login",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          
+                      child: AnimatedContainer(
+                        duration: Duration(seconds:1),
+                        height: 50,
+                        width: changedButton?50:130,
+                        
+                        alignment: Alignment.center,
+                        child: changedButton?Icon(
+                          Icons.done,
+                          color:Colors.white,
+                        )
+                        :Text("Sign Up",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            
+                          ),
                         ),
+                        
+                        /* decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 243, 118, 35),
+                          borderRadius: BorderRadius.circular(changedButton?50:8),
+                        ), */
                       ),
-                      
-                      /* decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 243, 118, 35),
-                        borderRadius: BorderRadius.circular(changedButton?50:8),
-                      ), */
                     ),
                   ),
-                ),
-        
-                SizedBox(
-                  height: 20,
-                ),
-        
+                  
+                  SizedBox(
+                    height: 20,
+                  ),
+                  
+                  
+                  
+                  
+                  
+                  
+                 /*  ElevatedButton(
+                    onPressed: (){
+                      Navigator.pushNamed(context, MyRoutes.homeRoute);
+                    }, 
+                    child: Text("Login"),
+                    style: TextButton.styleFrom(minimumSize: Size(130, 40)),
+                  )  */
+                ],
+               ),
+              )
                 
-        
-        
                 
-        
-               /*  ElevatedButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, MyRoutes.homeRoute);
-                  }, 
-                  child: Text("Login"),
-                  style: TextButton.styleFrom(minimumSize: Size(130, 40)),
-                )  */
               ],
-             ),
-            )
-              
-              
-            ],
+            ),
           ),
         ),
 
