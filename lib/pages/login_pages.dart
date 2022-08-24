@@ -217,9 +217,35 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
+                SizedBox(
+                  height: 15,
+                ),
 
+                GestureDetector(
+                  onTap: () => moveToHome(context),
+                  child: RichText(
+                    text:TextSpan(
+                      children:[ 
+                      TextSpan(
+                        text: "Don't have an Account?",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ) 
+                      ),
 
-
+                      TextSpan(
+                        text: "Sign Up",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ) 
+                      )
+                     ]
+                    )
+                   
+                  ),
+                  
+                )
         
                 
         
