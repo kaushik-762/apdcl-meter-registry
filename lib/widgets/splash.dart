@@ -1,3 +1,4 @@
+import 'package:apdcl_meter_registry_system/pages/home_page.dart';
 import 'package:apdcl_meter_registry_system/pages/login_pages.dart';
 import 'package:apdcl_meter_registry_system/pages/signup_page.dart';
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
@@ -24,7 +25,7 @@ class _SplashState extends State<Splash> {
 
    _navigatetoLogin()async{
     await Future.delayed(Duration(seconds: 2),(){});
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
    }
   
 
