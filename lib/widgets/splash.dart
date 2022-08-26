@@ -4,6 +4,8 @@ import 'package:apdcl_meter_registry_system/pages/signup_page.dart';
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
 import 'package:flutter/material.dart';
 
+import '../pages/main_page.dart';
+
 
 
 class Splash extends StatefulWidget {
@@ -25,7 +27,7 @@ class _SplashState extends State<Splash> {
 
    _navigatetoLogin()async{
     await Future.delayed(Duration(seconds: 2),(){});
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainPage()));
    }
   
 

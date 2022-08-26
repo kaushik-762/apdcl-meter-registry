@@ -1,9 +1,16 @@
 import 'package:apdcl_meter_registry_system/widgets/drawer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final user=FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
 
@@ -24,16 +31,40 @@ class HomePage extends StatelessWidget {
 
 
 
-      body: Center(
-        child: Text("Welcome",
-        style: TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 234, 92, 22),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(
+          horizontal: 30,
+          vertical:100,
         ),
-        
+        child: Center(
+          child: Column(
+            children: [
+              Text("Welcome",
+                style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 234, 92, 22),
+                  ),
+               ),
+      
+               MaterialButton(
+                onPressed: (){
+                  FirebaseAuth.instance.signOut();
+                },
+                color: Color.fromARGB(255, 234, 92, 22),
+                child: Text("Log Out"),
+               )
+      
+      
+                
+               
+      
+      
+          ],
+          )
+          
+      
         ),
-
       ),
 
 

@@ -1,4 +1,5 @@
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -21,11 +22,19 @@ class LoginPage extends StatefulWidget {
 }
    //"_"-->Underscore makes it private
 class _LoginPageState extends State<LoginPage> {
+  //text controllers
+  final _emailController=TextEditingController();
+  final _passwordController=TextEditingController();
   String name="";
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
-  moveToHome(BuildContext context)async{
-    if(_formKey.currentState!.validate()){
+  Future moveToHome(BuildContext context)async{
+
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: _emailController.text.trim(), 
+      password: _passwordController.text.trim(),
+      );
+   if(_formKey.currentState!.validate()){
     setState(() {
         changedButton=true;
     });
@@ -35,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
         changedButton=false;
     });
-    }
+    } 
   }
 
   moveToSignUp(BuildContext context)async{
@@ -110,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     TextFormField(
+                    controller: _emailController,
                     decoration: InputDecoration(
 
                     //border: OutlineInputBorder(),
@@ -142,6 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                 
                 
                 TextFormField(
+                  controller: _passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     //border: OutlineInputBorder(),
