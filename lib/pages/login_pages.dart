@@ -29,12 +29,18 @@ class _LoginPageState extends State<LoginPage> {
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
   Future moveToHome(BuildContext context)async{
+    setState(() {
+        changedButton=true;
+      });
+      
 
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: _emailController.text.trim(), 
       password: _passwordController.text.trim(),
       );
-   if(_formKey.currentState!.validate()){
+
+      
+   /* if(_formKey.currentState!.validate()){
     setState(() {
         changedButton=true;
     });
@@ -44,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
         changedButton=false;
     });
-    } 
+    }  */
   }
 
   moveToSignUp(BuildContext context)async{
@@ -128,8 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                      Icons.email,
                      color: Color.fromARGB(255, 243, 118, 35),
                     ),
-                    hintText: "Enter Username",
-                    labelText: "Username",
+                    hintText: "Enter Email",
+                    labelText: "Email",
                     
                   
                   ),
