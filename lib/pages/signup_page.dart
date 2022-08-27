@@ -32,6 +32,9 @@ class _SignUpState extends State<SignUp> {
       }); */
       
       if(confirmPassword()){
+        setState(() {
+        changedButton=true;
+      });
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: _emailController.text.trim(), 
       password: _passwordController.text.trim(),
@@ -220,7 +223,7 @@ class _SignUpState extends State<SignUp> {
         
                   
                   SizedBox(
-                  height: 40,
+                  height: 30,
                   ),
                   
                   
