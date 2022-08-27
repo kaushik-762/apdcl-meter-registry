@@ -39,9 +39,9 @@ class _HomePageState extends State<HomePage> {
         child: Center(
           child: Column(
             children: [
-              Text("Welcome",
+              Text("Welcome "+ user.email!,
                 style: TextStyle(
-                fontSize: 30,
+                fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: Color.fromARGB(255, 234, 92, 22),
                   ),

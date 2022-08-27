@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   String name="";
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
-  Future moveToHome(BuildContext context)async{
+  Future Signin(BuildContext context)async{
 
     
       setState(() {
@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
                SizedBox(
-                height: 200,
+                height: 180,
               ),
               
                       
@@ -220,7 +220,7 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: BorderRadius.circular(changedButton?50:8),
                   child: InkWell(
                     splashColor: Color.fromARGB(255, 131, 252, 1),
-                    onTap: ()=>moveToHome(context),
+                    onTap: ()=>Signin(context),
                       
                     
                     child: AnimatedContainer(

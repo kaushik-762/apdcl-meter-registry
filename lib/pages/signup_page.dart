@@ -1,4 +1,5 @@
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +17,12 @@ class _SignUpState extends State<SignUp> {
   final _emailController=TextEditingController();
   final _passwordController=TextEditingController();
   final _confirmPasswordController=TextEditingController();
+  final _nameController=TextEditingController();
   void disposal(){
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _nameController.dispose();
 
     super.dispose();
   }
@@ -34,24 +37,30 @@ class _SignUpState extends State<SignUp> {
       if(confirmPassword()){
         setState(() {
         changedButton=true;
-      });
+       });
+
+       //create user
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: _emailController.text.trim(), 
       password: _passwordController.text.trim(),
       );
-      }
 
-    /* if(_formKey.currentState!.validate()){
-    setState(() {
-        changedButton=true;
-    });
-    await Future.delayed(Duration(seconds:1));
-    await Navigator.pushNamed(context, MyRoutes.homeRoute);
-        
-    setState(() {
-        changedButton=false;
-    });
-    } */
+      //add user details
+      addUserDetails(
+        _nameController.text.trim(), 
+        _emailController.text.trim(),
+        );
+      }
+  }
+
+  Future addUserDetails(String name,String email) async{
+
+    await FirebaseFirestore.instance.collection('users').add({
+      'Name': name,
+      'Email': email,
+    }
+    );
+
   }
 
 
@@ -95,7 +104,7 @@ class _SignUpState extends State<SignUp> {
           
           
                  SizedBox(
-                  height: 200,
+                  height: 180,
                 ),
                 
                         
@@ -126,7 +135,28 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 35),
                   child: Column(
                     children: [
+                      //Name
+                      TextFormField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    prefixIcon: Icon(
+                     Icons.email,
+                     color: Color.fromARGB(255, 243, 118, 35),
+                    ),
+                      hintText: "Enter Username",
+                      labelText: "Username",
                       
+                    
+                    ),
+                   
+                  ),
+
+                  SizedBox(
+                    height: 10,
+                  ),
+
+                    //Email 
                   TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
@@ -184,7 +214,7 @@ class _SignUpState extends State<SignUp> {
                      color: Color.fromARGB(255, 243, 118, 35),
                     ),
                       hintText: "Enter Password",
-                      labelText: "Password",
+                      labelText: "Confirm Password",
                       
                     ),
                    
