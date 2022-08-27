@@ -15,10 +15,12 @@ class _SignUpState extends State<SignUp> {
   //text controllers
   final _emailController=TextEditingController();
   final _passwordController=TextEditingController();
-
+  final _confirmPasswordController=TextEditingController();
   void disposal(){
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
+
     super.dispose();
   }
   bool changedButton=false;
@@ -29,11 +31,12 @@ class _SignUpState extends State<SignUp> {
         changedButton=true;
       }); */
       
-
+      if(confirmPassword()){
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: _emailController.text.trim(), 
       password: _passwordController.text.trim(),
       );
+      }
 
     /* if(_formKey.currentState!.validate()){
     setState(() {
@@ -46,6 +49,16 @@ class _SignUpState extends State<SignUp> {
         changedButton=false;
     });
     } */
+  }
+
+
+  bool confirmPassword(){
+    if(_passwordController.text.trim()==_confirmPasswordController.text.trim()){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -149,12 +162,37 @@ class _SignUpState extends State<SignUp> {
                    
                   ),
 
+
+
+                  //Confirm Password
+                  SizedBox(
+                    height: 10,
+                  ),
+
+                  
+                  TextFormField(
+                    controller: _confirmPasswordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+
+                    contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    prefixIcon: Icon(
+                     Icons.lock,
+                     color: Color.fromARGB(255, 243, 118, 35),
+                    ),
+                      hintText: "Enter Password",
+                      labelText: "Password",
+                      
+                    ),
+                   
+                  ),
+
                    SizedBox(
                   height: 15,
                 ),
 
                 GestureDetector(
-                 // onTap: () => moveToSignUp(context),
+                 // onTap: () => move to Login page(context),
                  onTap: widget.showLoginPage ,
                   child: RichText(
                     text:TextSpan(
@@ -169,7 +207,7 @@ class _SignUpState extends State<SignUp> {
                       TextSpan(
                         text: "Login",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 8, 52, 213),
                           fontWeight: FontWeight.bold,
                         ) 
                       )

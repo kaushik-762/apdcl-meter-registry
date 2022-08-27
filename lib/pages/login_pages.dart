@@ -1,3 +1,4 @@
+import 'package:apdcl_meter_registry_system/pages/forgot_pw_page.dart';
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
   Future moveToHome(BuildContext context)async{
 
     
-    setState(() {
+      setState(() {
         changedButton=true;
       });
       
@@ -187,19 +188,26 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
 
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
+                GestureDetector(
+                  
+                  
                     
-                    onTap: ()=>moveToHome(context),
-                    child: Text("Forgot Password?",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black,
-                      
+                    onTap: () {
+                      Navigator.push(context, 
+                      MaterialPageRoute(builder: (context)=>ForgotPw()));
+                    },
+                    
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      child: Text("Forgot Password?",
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: Color.fromARGB(255, 8, 52, 213),
+                        
+                      ),
+                      ),
                     ),
-                    ),
-                  ),
+                  
                 ),
         
                 SizedBox(
@@ -259,7 +267,7 @@ class _LoginPageState extends State<LoginPage> {
                       TextSpan(
                         text: "Sign Up",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 8, 52, 213),
                           fontWeight: FontWeight.bold,
                         ) 
                       )
