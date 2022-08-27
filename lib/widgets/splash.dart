@@ -4,7 +4,7 @@ import 'package:apdcl_meter_registry_system/pages/signup_page.dart';
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
 import 'package:flutter/material.dart';
 
-import '../pages/main_page.dart';
+import '../auth/main_page.dart';
 
 
 

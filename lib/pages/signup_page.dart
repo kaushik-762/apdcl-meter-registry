@@ -1,8 +1,10 @@
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+  final VoidCallback showLoginPage;
+  const SignUp({Key? key,required this.showLoginPage,}) : super(key: key);
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -10,11 +12,30 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  
+  //text controllers
+  final _emailController=TextEditingController();
+  final _passwordController=TextEditingController();
+
+  void disposal(){
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
-  moveToHome(BuildContext context)async{
-    if(_formKey.currentState!.validate()){
+  Future moveToHome1(BuildContext context)async{
+
+    /* setState(() {
+        changedButton=true;
+      }); */
+      
+
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: _emailController.text.trim(), 
+      password: _passwordController.text.trim(),
+      );
+
+    /* if(_formKey.currentState!.validate()){
     setState(() {
         changedButton=true;
     });
@@ -24,7 +45,7 @@ class _SignUpState extends State<SignUp> {
     setState(() {
         changedButton=false;
     });
-    }
+    } */
   }
   @override
   Widget build(BuildContext context) {
@@ -63,14 +84,14 @@ class _SignUpState extends State<SignUp> {
                 
                         
                 CircleAvatar(
-                  radius: 50,
+                  radius: 70,
                   backgroundImage: AssetImage("assets/images/APDCLLOGO1.jpeg") ,
                   
                   
                ),
                   
                 SizedBox(
-                  height: 15,
+                  height: 30,
                 ),
                   
                 Text("APDCL ",style:TextStyle(
@@ -89,40 +110,9 @@ class _SignUpState extends State<SignUp> {
                   padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 35),
                   child: Column(
                     children: [
-                      TextFormField(
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    prefixIcon: Icon(
-                     Icons.face,
-                     color: Color.fromARGB(255, 243, 118, 35),
-                    ),
                       
-                      hintText: "Enter Username",
-                      labelText: "Name",
-                      
-                    
-                    ),
-                    validator: (value) {
-                      if(value!.isEmpty){
-                        return "Username cannot be empty";
-                      }
-                      return null;
-                    },
-                    
-                   /*  onChanged: (value){
-                     
-                      
-                      //setState--->calls the build method once again(i.e UI is created again)
-                      setState(() {});
-                  
-                    } */
-                  ),
-
-                  SizedBox(
-                    height: 10,
-                  ),
-
                   TextFormField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     prefixIcon: Icon(
@@ -134,20 +124,7 @@ class _SignUpState extends State<SignUp> {
                       
                     
                     ),
-                    validator: (value) {
-                      if(value!.isEmpty){
-                        return "Email cannot be empty";
-                      }
-                      return null;
-                    },
-                    
-                    onChanged: (value){
-                     
-                      
-                      //setState--->calls the build method once again(i.e UI is created again)
-                      setState(() {});
-                  
-                    }
+                   
                   ),
 
                   SizedBox(
@@ -156,6 +133,7 @@ class _SignUpState extends State<SignUp> {
 
                   
                   TextFormField(
+                    controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
 
@@ -168,16 +146,40 @@ class _SignUpState extends State<SignUp> {
                       labelText: "Password",
                       
                     ),
-                    validator: (value) {
-                      if(value!.isEmpty){
-                        return "Password cannot be empty";
-                      }
-                      else if(value.length<6){
-                        return "Password should be of atleast 6 characters";
-                      }
-                      return null;
-                    },
+                   
                   ),
+
+                   SizedBox(
+                  height: 15,
+                ),
+
+                GestureDetector(
+                 // onTap: () => moveToSignUp(context),
+                 onTap: widget.showLoginPage ,
+                  child: RichText(
+                    text:TextSpan(
+                      children:[ 
+                      TextSpan(
+                        text: "Already have an Account?",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ) 
+                      ),
+
+                      TextSpan(
+                        text: "Login",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ) 
+                      )
+                     ]
+                    )
+                   
+                  ),
+                  
+                ),
+        
                   
                   SizedBox(
                   height: 40,
@@ -189,7 +191,7 @@ class _SignUpState extends State<SignUp> {
                     borderRadius: BorderRadius.circular(changedButton?50:8),
                     child: InkWell(
                       splashColor: Color.fromARGB(255, 131, 252, 1),
-                      onTap: ()=>moveToHome(context),
+                      onTap: ()=>moveToHome1(context),
                         
                       
                       child: AnimatedContainer(
@@ -211,10 +213,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                         
-                        /* decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 243, 118, 35),
-                          borderRadius: BorderRadius.circular(changedButton?50:8),
-                        ), */
+                        
                       ),
                     ),
                   ),
@@ -245,19 +244,10 @@ class _SignUpState extends State<SignUp> {
           ),
         ),
 
-        drawer: Drawer(),
+       
 
 
-     /*  child: Container(
-        
-         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/APDCL.png"),
-            fit: BoxFit.fill,
-          )
-         ),
-        
-      ), */
+     
 
     );
 

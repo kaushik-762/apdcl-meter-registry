@@ -15,7 +15,8 @@ Widget buildForgotPassword(){
 }
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final VoidCallback showSignUpPage;
+  const LoginPage({Key? key,required this.showSignUpPage}) : super(key: key);
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -25,10 +26,19 @@ class _LoginPageState extends State<LoginPage> {
   //text controllers
   final _emailController=TextEditingController();
   final _passwordController=TextEditingController();
+  
+
+  void disposal(){
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
   String name="";
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
   Future moveToHome(BuildContext context)async{
+
+    
     setState(() {
         changedButton=true;
       });
@@ -70,13 +80,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Color.fromARGB(255, 205, 237, 244),
         
         
-       /*  appBar: AppBar(
-         backgroundColor: Color.fromARGB(255, 243, 118, 35),
-         title:Text("Login",style: TextStyle(
-          color: Colors.black,
-         ),), 
-        ), */
-
+       
 
        
         body:Form(
@@ -146,13 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                     return null;
                   },
                   
-                  /* onChanged: (value){
-                    name=value;
-                    
-                    //setState--->calls the build method once again(i.e UI is created again)
-                    setState(() {});
-        
-                  } */
+                  
                 ),
 
                 
@@ -236,10 +234,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       
-                      /* decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 243, 118, 35),
-                        borderRadius: BorderRadius.circular(changedButton?50:8),
-                      ), */
+                     
                     ),
                   ),
                 ),
@@ -249,7 +244,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 GestureDetector(
-                  onTap: () => moveToSignUp(context),
+                 // onTap: () => moveToSignUp(context),
+                 onTap: widget.showSignUpPage ,
                   child: RichText(
                     text:TextSpan(
                       children:[ 

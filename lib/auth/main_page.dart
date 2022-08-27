@@ -1,3 +1,4 @@
+import 'package:apdcl_meter_registry_system/auth/auth_page.dart';
 import 'package:apdcl_meter_registry_system/pages/home_page.dart';
 import 'package:apdcl_meter_registry_system/pages/login_pages.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,7 +16,7 @@ class MainPage extends StatelessWidget {
           return HomePage();
         }
         else{
-          return LoginPage();
+          return AuthPage();
         }
       },
       ),
