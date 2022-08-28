@@ -303,7 +303,8 @@ class _SignUpState extends State<SignUp> {
                       Navigator.pushNamed(context, MyRoutes.homeRoute);
                     }, 
                     child: Text("Login"),
-                    style: TextButton.styleFrom(minimumSize: Size(130, 40)),
+               
+     style: TextButton.styleFrom(minimumSize: Size(130, 40)),
                   )  */
                 ],
                ),
@@ -314,7 +315,6 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
         ),
-
        
 
 
