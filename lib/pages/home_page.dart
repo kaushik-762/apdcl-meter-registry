@@ -1,4 +1,5 @@
 import 'package:apdcl_meter_registry_system/widgets/drawer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final user=FirebaseAuth.instance.currentUser!;
+
+ 
   @override
   Widget build(BuildContext context) {
 
@@ -47,13 +50,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                ),
       
-               MaterialButton(
+               /* MaterialButton(
                 onPressed: (){
                   FirebaseAuth.instance.signOut();
                 },
                 color: Color.fromARGB(255, 234, 92, 22),
                 child: Text("Log Out"),
-               )
+               ) */
       
       
                 
