@@ -1,6 +1,9 @@
 import 'dart:ffi';
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:dropdownfield2/dropdownfield2.dart';
 import 'package:intl/intl.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,24 +17,65 @@ class secondTab extends StatefulWidget {
 }
 
 class _secondTabState extends State<secondTab> {
-
+  //text controllers
+  final _nameController=TextEditingController();
+  final _emailController=TextEditingController();
+  final _metermakeController=TextEditingController();
+  final _phaseController=TextEditingController();
+  final _pincodeController=TextEditingController();
   final _date=TextEditingController();
+  
+  
+  void disposal(){
+    _nameController.dispose();
+    _emailController.dispose();
+    _metermakeController.dispose();
+    _phaseController.dispose();
+    _pincodeController.dispose();
+
+    _date.dispose();
+    
+
+    super.dispose();
+  }
+
+  
  
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
   
   
   String? value1;
-  final phaseType=[
+  List<String> phaseType=[
     "1","3"
   ];
 
 String? value2;
-  final meterMake=[
+  List<String> meterMake=[
     "x","y","z"
   ];
 
   
+
+  //add Customer
+  Future addCustomer(String name,String email,String metermake,String phase,String pincode,String date ) async{
+
+    setState(() {
+        changedButton=true;
+       });
+
+    await FirebaseFirestore.instance.collection('consumers').add({
+
+      'Consumer Name': name,
+      'Consumer Email': email,
+      'Meter Make':metermake,
+      'Phase Type':phase,
+      'Pin Code':pincode,
+      'Date':date,
+    }
+    );
+
+  }
 
   
   @override
@@ -78,7 +122,7 @@ String? value2;
 
               SizedBox(height: 30,),
              TextFormField(
-                    
+                    controller: _nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
@@ -93,7 +137,7 @@ String? value2;
 
                    SizedBox(height: 15,),
                    TextFormField(
-                    
+                    controller: _emailController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
@@ -111,8 +155,8 @@ String? value2;
 
 
                  SizedBox(height: 15,),
-                   Container(
-                    padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     decoration:BoxDecoration(
                         
                       shape: BoxShape.rectangle,
@@ -122,28 +166,33 @@ String? value2;
                         
                       
                       ), 
-                     child: DropdownButton<String>(
+
+                      child: DropDownField(
+
                       
-                     /* BoxDecoration(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                        contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                      
-                        hintText: "Input Phase Type",
-                        labelText: "Phase Type",
+                       
+                        controller:_metermakeController,
                         
-                      
-                      ), */ 
-                      isExpanded: true,
-                      hint: Text('Meter Make'),
-                      value: value2,
-                      items: meterMake.map(buildMenuItem1).toList(),
-                      onChanged:(value) => setState(() {
-                        this.value2=value;
                         
-                      }),
-                     
+                        hintText: 'Meter Make',
+                        enabled:true,
+                        items: meterMake,
+                        onValueChanged: (value) {
+                          setState(() {
+                          
+                          this.value2=value;
+                          
+                          
+                        });
+                        },
+                        
+                        
+             
+                       
                   ),
-                   ),
+                    ),
+                  
+                   
               
 
 
@@ -159,33 +208,35 @@ String? value2;
                         
                       
                       ), 
-                     child: DropdownButton<String>(
+                     child: DropDownField(
+
                       
-                     /* BoxDecoration(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                        contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                      
-                        hintText: "Input Phase Type",
-                        labelText: "Phase Type",
+                       
+                        controller:_phaseController,
                         
-                      
-                      ), */ 
-                      isExpanded: true,
-                      hint: Text('Phase Type'),
-                      value: value1,
-                      items: phaseType.map(buildMenuItem).toList(),
-                      onChanged:(value) => setState(() {
-                        this.value1=value;
                         
-                      }),
-                     
+                        hintText: 'Phase Type',
+                        enabled:true,
+                        items: phaseType,
+                        onValueChanged: (value) {
+                          setState(() {
+                          
+                          this.value1=value;
+                          
+                          
+                        });
+                        },
+                        
+                        
+             
+                       
                   ),
                    ),
 
 
                   SizedBox(height: 15,),
                    TextFormField(
-                    
+                     controller: _pincodeController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
@@ -230,30 +281,13 @@ String? value2;
                              _date.text= DateFormat('yyyy-MM-dd').format(pickedDate);
                           });
                         }
+                      
                     },
                    
                    ),
                   
 
-                 /*  SizedBox(height: 15,),
-                  ElevatedButton(
-                    child: Text('Select Date'),
-                     onPressed:()async{
-                      DateTime? newDate=await
-                      showDatePicker(
-                        
-                        context: context, 
-                        initialDate: , 
-                        firstDate: DateTime(1900), 
-                        lastDate: DateTime(2100),
-                        );
-                        if(newDate==null) return;
-
-                        setState(() {
-                          date=newDate;
-                        });
-                     },
-                    ), */
+               
                    
 
                 SizedBox(height: 20,),
@@ -263,7 +297,14 @@ String? value2;
                   borderRadius: BorderRadius.circular(changedButton?50:8),
                   child: InkWell(
                     splashColor: Color.fromARGB(255, 131, 252, 1),
-                   // onTap: ()=>Signin(context),
+                   onTap: ()=>addCustomer(
+                    _nameController.text.trim(),
+                    _emailController.text.trim(),
+                    _metermakeController.text.trim(),
+                    _phaseController.text.trim(),
+                    _pincodeController.text.trim(),
+                    _date.text.trim(),
+                   ),
                       
                     
                     child: AnimatedContainer(

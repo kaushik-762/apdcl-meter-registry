@@ -39,16 +39,30 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey=GlobalKey<FormState>();
   Future Signin(BuildContext context)async{
 
-    
+      try{
       setState(() {
         changedButton=true;
       });
       
 
       await FirebaseAuth.instance.signInWithEmailAndPassword(
+        
       email: _emailController.text.trim(), 
       password: _passwordController.text.trim(),
       );
+      }on FirebaseAuthException catch (e){
+        print(e);
+        showDialog(context: context,
+        builder: (context){
+          return AlertDialog(
+            content: Text("Invalid Password."),
+          );
+        }
+       ) ; 
+       setState(() {
+        changedButton=false;
+      });
+      }
 
       
    /* if(_formKey.currentState!.validate()){
