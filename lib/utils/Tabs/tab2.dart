@@ -59,7 +59,8 @@ String? value2;
 
   //add Customer
   Future addCustomer(String name,String email,String metermake,String phase,String pincode,String date ) async{
-
+    
+   if(name!='' && email!='' && metermake!='' && phase!='' && pincode!='' && date!=''){
     setState(() {
         changedButton=true;
        });
@@ -75,6 +76,30 @@ String? value2;
     }
     );
 
+    
+
+  }
+  
+ 
+  
+  else{
+    showDialog(
+      context: context, 
+      builder: (context){
+        return AlertDialog(
+          content: Text('Please fill all the fields'),
+        );
+      }
+      );
+
+  }
+
+
+       setState(() {
+        changedButton=false;
+       });
+
+  
   }
 
   
@@ -302,7 +327,7 @@ String? value2;
                     _emailController.text.trim(),
                     _metermakeController.text.trim(),
                     _phaseController.text.trim(),
-                    _pincodeController.text.trim(),
+                 _pincodeController.text.trim(),
                     _date.text.trim(),
                    ),
                       
