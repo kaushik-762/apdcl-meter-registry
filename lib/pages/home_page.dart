@@ -14,21 +14,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final user=FirebaseAuth.instance.currentUser!;
+  //final user=FirebaseAuth.instance.currentUser!;
 
  
   @override
   Widget build(BuildContext context) {
     final style=TextStyle(fontWeight: FontWeight.bold,
-                  color:  Color.fromARGB(255, 137, 135, 237),
-                  fontSize: 30,);
+                  color:  Colors.black,
+                  fontSize: 20,);
 
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+       
         
         appBar: AppBar(
-           backgroundColor:  Color.fromARGB(255, 137, 135, 237),
+           backgroundColor:   Color.fromARGB(255, 234, 113, 48),
           title: Text("APDCL",
             style: TextStyle(
               
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     
         body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
-            horizontal: 0,
+            horizontal: 15,
             vertical:30,
           ),
           child: Center(
@@ -54,11 +55,11 @@ class _HomePageState extends State<HomePage> {
               
               children: [
                 
-                 Text('Welcome to APDCL',
+               /*   Text('Welcome to APDCL',
                   style:GoogleFonts.ptMono(
                     textStyle: style,
                   )
-                  ),
+                  ), */
                  
     
                  SizedBox(
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
 
 
                  SizedBox(
-                  height: 15,
+                  height: 30,
                  ),
 
 
@@ -81,35 +82,62 @@ class _HomePageState extends State<HomePage> {
                   
                  
                   
-                   TabBar(
-                    labelColor: Colors.white,
-                    tabs:[
-
-                       Tab(
-                        icon: Icon(Icons.person),
-                        text: 'Customer Enquiry',
-                      ),
-                      
-                      Tab(
-                        icon: Icon(Icons.add),
-                        text: 'Add Customer',
-                      ),  
-
-
-                    ]
-                    
+                   Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Color.fromARGB(255, 132, 154, 237),
                     ),
+                    
+                     child: TabBar(
+                      indicator: BoxDecoration(
+                        color: Color.fromARGB(252, 67, 107, 217),
+                        borderRadius: BorderRadius.circular(15)
+                      ),
+
+                      labelColor: Colors.white,
+                      
+                      tabs:[
+                      
+
+                         Tab(
+                          icon: Icon(Icons.person),
+                          text: 'Consumer Enquiry',
+                        ),
+                        
+                        Tab(
+                          icon: Icon(Icons.add),
+                          text: 'Add Consumer',
+                        ),  
+
+
+                      ]
+                      
+                      ),
+                   ),
                  
 
-                /*  Expanded(
-                  child: TabBarView(
-                    children: [
-                      firstTab(),
-                      secondTab(),
+              
+                
+                  
+                    
+                     Container(
                       
-                    ],
-                    )
-                 ),  */
+                      
+                      height: double.maxFinite,
+                      width: double.maxFinite,
+                       child: TabBarView(
+                        
+                        
+                        children: [
+                          firstTab(),
+                          secondTab(),
+                          
+                        ],
+                        ),
+                    
+                     ),
+                  
+                 
 
         
         

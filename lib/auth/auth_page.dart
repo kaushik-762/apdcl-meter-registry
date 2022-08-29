@@ -25,6 +25,11 @@ class _AuthPageState extends State<AuthPage> {
     else{
       return  SignUp(showLoginPage: toggleScreen);
     };
+
+
+
+
+    
     
   }
 }
