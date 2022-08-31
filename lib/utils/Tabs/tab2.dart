@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 
+import 'package:apdcl_meter_registry_system/utils/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:dropdownfield2/dropdownfield2.dart';
@@ -76,6 +77,8 @@ String? value2;
     }
     );
 
+
+    moveToAdd(context);
     
 
   }
@@ -95,11 +98,21 @@ String? value2;
   }
 
 
-       setState(() {
+       /* setState(() {
         changedButton=false;
-       });
+       }); */
 
   
+  }
+
+   moveToAdd(BuildContext context)async{
+    
+    
+    await Future.delayed(Duration(seconds:1));
+    await Navigator.pushNamed(context, MyRoutes.addRoute);
+        
+    
+    
   }
 
   

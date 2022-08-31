@@ -3,6 +3,7 @@ import 'package:apdcl_meter_registry_system/pages/login_pages.dart';
 import 'package:apdcl_meter_registry_system/pages/signup_page.dart';
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
 import 'package:apdcl_meter_registry_system/widgets/splash.dart';
+import 'package:apdcl_meter_registry_system/widgets/successful_add.dart';
 
 import 'package:apdcl_meter_registry_system/widgets/themes.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +36,9 @@ class MyApp extends StatelessWidget {
       routes:{
         "/":(context)=> Splash(),
         MyRoutes.homeRoute:(context) => HomePage(),
-        //MyRoutes.loginRoute:(context) => LoginPage(showSignUpPage:,),
-        //MyRoutes.signRoute:(context) => SignUp(),
+       // MyRoutes.loginRoute:(context) => LoginPage(showSignUpPage:),
+       // MyRoutes.signRoute:(context) => SignUp(),
+       MyRoutes.addRoute:(context) => ConsumerAdd(),
       
       }
       
