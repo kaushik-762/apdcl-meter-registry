@@ -1,6 +1,7 @@
+import 'package:apdcl_meter_registry_system/widgets/boxes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:apdcl_meter_registry_system/model/consumers.dart';
 class firstTab extends StatefulWidget {
   const firstTab({Key? key}) : super(key: key);
 
@@ -16,7 +17,29 @@ class _firstTabState extends State<firstTab> {
   final _formKey=GlobalKey<FormState>();
 
  
+ readDetails(cID){
+
+   final myBox=Boxes.getConsumers();
+   final myConsumers=myBox.get(cID);
+   myBox.values;
+   myBox.keys;
+   showDialog(context: context, 
+   builder: (context){
+    return AlertDialog(
+
+      content: Text(''
+        
+
       
+      ),
+
+    );
+
+
+   }); 
+   
+   
+ }   
   
   @override
   Widget build(BuildContext context) {
@@ -74,7 +97,7 @@ class _firstTabState extends State<firstTab> {
                   borderRadius: BorderRadius.circular(changedButton?50:8),
                   child: InkWell(
                     splashColor: Color.fromARGB(255, 131, 252, 1),
-                   // onTap: ()=>Signin(context),
+                   //onTap: ()=>getDetails(context),
                       
                     
                     child: AnimatedContainer(

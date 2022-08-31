@@ -109,7 +109,6 @@ class _HomePageState extends State<HomePage> {
                           text: 'Add Consumer',
                         ),  
 
-
                       ]
                       
                       ),
@@ -131,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           firstTab(),
                           secondTab(),
+                          
                           
                         ],
                         ),

@@ -39,10 +39,20 @@ dependencies:
   firebase_core: ^1.21.1
   cloud_firestore: ^3.4.6
   dropdownfield2: ^1.0.7
+  qr_flutter: ^4.0.0
+
+  #for hive
+  hive: ^2.2.3
+  hive_flutter: ^1.0.0
+ 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  #hive database generator
+  build_runner: ^1.12.2
+  hive_generator: ^1.0.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

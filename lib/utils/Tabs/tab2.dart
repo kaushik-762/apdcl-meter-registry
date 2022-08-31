@@ -1,5 +1,11 @@
 import 'dart:ffi';
 
+import 'package:apdcl_meter_registry_system/model/consumers.dart';
+import 'package:apdcl_meter_registry_system/widgets/boxes.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:http/http.dart' as http;
+
+
 
 import 'package:apdcl_meter_registry_system/utils/routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +17,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class secondTab extends StatefulWidget {
+
   const secondTab({Key? key}) : super(key: key);
 
   @override
@@ -19,6 +26,7 @@ class secondTab extends StatefulWidget {
 
 class _secondTabState extends State<secondTab> {
   //text controllers
+  final _consumerIDController=TextEditingController();
   final _nameController=TextEditingController();
   final _emailController=TextEditingController();
   final _metermakeController=TextEditingController();
@@ -33,8 +41,12 @@ class _secondTabState extends State<secondTab> {
     _metermakeController.dispose();
     _phaseController.dispose();
     _pincodeController.dispose();
+   
 
     _date.dispose();
+
+
+     Hive.box('consumers').close();
     
 
     super.dispose();
@@ -44,6 +56,8 @@ class _secondTabState extends State<secondTab> {
  
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
+  
+
   
   
   String? value1;
@@ -59,7 +73,7 @@ String? value2;
   
 
   //add Customer
-  Future addCustomer(String name,String email,String metermake,String phase,String pincode,String date ) async{
+ /*  Future addCustomer(String name,String email,String metermake,String phase,String pincode,String date ) async{
     
    if(name!='' && email!='' && metermake!='' && phase!='' && pincode!='' && date!=''){
     setState(() {
@@ -67,7 +81,7 @@ String? value2;
        });
 
     await FirebaseFirestore.instance.collection('consumers').add({
-
+      
       'Consumer Name': name,
       'Consumer Email': email,
       'Meter Make':metermake,
@@ -76,16 +90,13 @@ String? value2;
       'Date':date,
     }
     );
-
-
     moveToAdd(context);
     
 
+    
+
   }
-  
- 
-  
-  else{
+else{
     showDialog(
       context: context, 
       builder: (context){
@@ -96,21 +107,55 @@ String? value2;
       );
 
   }
+  
+  } */
 
+//Create
+ Future addCustomer(String cID,String cName,String email,String metermake,String phaseType,String pin,String date)async{
+    if(cID!='' && cName!='' && email!='' && metermake!='' && phaseType!='' && pin!='' && date!=''){
+      //for done icon
+      setState(() {
+        changedButton=true;
+       });
 
-       /* setState(() {
-        changedButton=false;
-       }); */
+    final consumers=Consumers()
+    ..cID=cID
+    ..cName=cName
+    ..email=email
+    ..metermake=metermake
+    ..phaseType=phaseType
+    ..pin=pin
+    ..date=date;
+
+    final box= Boxes.getConsumers();
+    //box.add(consumers);
+    box.put(cID,consumers);
+
+    moveToAdd(context);
+    }
+    else{
+      showDialog(
+      context: context, 
+      builder: (context){
+        return AlertDialog(
+          content: Text('Please fill all the fields'),
+        );
+      }
+      );
+
+    }
+
+  }
 
   
-  }
 
    moveToAdd(BuildContext context)async{
     
     
     await Future.delayed(Duration(seconds:1));
     await Navigator.pushNamed(context, MyRoutes.addRoute);
-        
+
+   
     
     
   }
@@ -159,6 +204,21 @@ String? value2;
               ), */
 
               SizedBox(height: 30,),
+             TextFormField(
+                    controller: _consumerIDController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    
+                      hintText: "Enter Consumer Name",
+                      labelText: "Consumer Name",
+                      
+                    
+                    ),
+                   
+                  ), 
+
+              SizedBox(height: 15,),
              TextFormField(
                     controller: _nameController,
                     decoration: InputDecoration(
@@ -336,6 +396,7 @@ String? value2;
                   child: InkWell(
                     splashColor: Color.fromARGB(255, 131, 252, 1),
                    onTap: ()=>addCustomer(
+                    _consumerIDController.text.trim(),
                     _nameController.text.trim(),
                     _emailController.text.trim(),
                     _metermakeController.text.trim(),
@@ -370,6 +431,8 @@ String? value2;
                   ),
                 ),
                 
+
+              
 
 
               

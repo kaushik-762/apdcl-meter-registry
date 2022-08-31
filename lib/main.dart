@@ -1,3 +1,4 @@
+import 'package:apdcl_meter_registry_system/model/consumers.dart';
 import 'package:apdcl_meter_registry_system/pages/home_page.dart';
 import 'package:apdcl_meter_registry_system/pages/login_pages.dart';
 import 'package:apdcl_meter_registry_system/pages/signup_page.dart';
@@ -9,10 +10,15 @@ import 'package:apdcl_meter_registry_system/widgets/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  
+  await Hive.initFlutter();
+  Hive.registerAdapter(ConsumersAdapter());
+  await Hive.openBox<Consumers>('consumers');
   runApp(const MyApp());
 }
 
