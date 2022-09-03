@@ -1,4 +1,5 @@
-import 'package:apdcl_meter_registry_system/model/consumers.dart';
+
+import 'package:apdcl_meter_registry_system/pages/consumerDetails.dart';
 import 'package:apdcl_meter_registry_system/pages/home_page.dart';
 import 'package:apdcl_meter_registry_system/pages/login_pages.dart';
 import 'package:apdcl_meter_registry_system/pages/signup_page.dart';
@@ -16,9 +17,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await Hive.initFlutter();
-  Hive.registerAdapter(ConsumersAdapter());
-  await Hive.openBox<Consumers>('consumers');
+
+  
   runApp(const MyApp());
 }
 
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
        // MyRoutes.loginRoute:(context) => LoginPage(showSignUpPage:),
        // MyRoutes.signRoute:(context) => SignUp(),
        MyRoutes.addRoute:(context) => ConsumerAdd(),
-      
+       
       }
       
 

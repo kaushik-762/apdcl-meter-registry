@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
-import 'package:apdcl_meter_registry_system/model/consumers.dart';
-import 'package:apdcl_meter_registry_system/widgets/boxes.dart';
+
+
 //import 'package:hive_flutter/adapters.dart';
 import 'package:http/http.dart' as http;
 
@@ -112,42 +112,9 @@ else{
   
   } 
 
-//Create
- /*Future addCustomer(String cID,String cName,String email,String metermake,String phaseType,String pin,String date)async{
-    if(cID!=null && cName!=null && email!=null && metermake!=null && phaseType!=null && pin!=null && date!=null){
-      //for done icon
-      setState(() {
-        changedButton=true;
-       });
 
-    final consumers=Consumers()
-    ..cID=cID
-    ..cName=cName
-    ..email=email
-    ..metermake=metermake
-    ..phaseType=phaseType
-    ..pin=pin
-    ..date=date;
 
-    final box= Boxes.getConsumers();
-    //box.add(consumers);
-    box.put(cID,consumers);
-
-    moveToAdd(context);
-    }
-    else{
-      showDialog(
-      context: context, 
-      builder: (context){
-        return AlertDialog(
-          content: Text('Please fill all the fields'),
-        );
-      }
-      );
-
-    }
-
-  }   */
+  
 
   
 

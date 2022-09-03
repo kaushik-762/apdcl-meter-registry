@@ -20,8 +20,21 @@ class ConsumerDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      child: StreamBuilder(
+    return Scaffold(
+
+      appBar: AppBar(
+
+        backgroundColor:   Color.fromARGB(255, 234, 113, 48),
+          title: Text("APDCL",
+            style: TextStyle(
+              
+              fontSize: 20,
+              fontStyle: FontStyle.normal,
+            ),
+          )
+
+      ),
+      body: StreamBuilder(
         stream: detailsofconsumer(context),
         builder: (context, AsyncSnapshot snapshot){
           if(!snapshot.hasData)
@@ -32,9 +45,138 @@ class ConsumerDetails extends StatelessWidget {
             );
           }
 
-           return new ListView.builder(
-            itemCount: snapshot.data.documents.length,
-            itemBuilder: itemBuilder)
+            return new ListView.builder(
+            itemCount: snapshot.data.docs.length,
+            itemBuilder: (context,index){
+              DocumentSnapshot consumer1=snapshot.data.docs[index];
+              
+              return Center(
+                  child: Container(
+                      height: double.maxFinite,
+                      width: double.maxFinite,
+                    child: Column(
+                      children: [
+
+                        SizedBox(
+                          height: 15,
+                        ),
+        
+                        CircleAvatar(
+                          radius: 50,
+                          backgroundImage: AssetImage('assets/images/APDCLLOGO1.jpeg'),
+                        ), 
+
+
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Text('Consumer ID: '+consumer1['Consumer id']),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+
+                        Text('Consumer Name: '+consumer1['Consumer Name']),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+
+
+                        Text('Consumer Email: '+consumer1['Consumer Email']),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+
+                        Text('Meter Make: '+consumer1['Meter Make']),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+
+                        Text('Phase Type: '+consumer1['Phase Type']),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+
+                        Text('Pincode: '+consumer1['Pin Code']),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+
+                        Text('Allotment Date: '+consumer1['Date']),
+
+                        SizedBox(
+                          height: 20,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+
+                
+
+              
+            }
+            
+            ); 
+
+         /*  return ListView(
+              children: snapshot.data.documents.map((consumer1){
+                return Center(
+                  child: Column(
+                    children: [
+                      Text('Consumer ID: '+consumer1['Consumer ID']),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                      Text('Consumer Name: '+consumer1['Consumer Name']),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+
+
+                      Text('Consumer Email: '+consumer1['Consumer Email']),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                      Text('Meter Make: '+consumer1['Meter Make']),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                      Text('Phase Type: '+consumer1['Phase Type']),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                      Text('Pincode: '+consumer1['Pin Code']),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                      Text('Allotment Date: '+consumer1['Date']),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                );
+
+              })
+            );   */
           
            
           }

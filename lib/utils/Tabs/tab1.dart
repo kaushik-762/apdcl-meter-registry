@@ -1,8 +1,8 @@
 import 'package:apdcl_meter_registry_system/pages/consumerDetails.dart';
-import 'package:apdcl_meter_registry_system/widgets/boxes.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:apdcl_meter_registry_system/model/consumers.dart';
+
 class firstTab extends StatefulWidget {
   const firstTab({Key? key}) : super(key: key);
 
@@ -18,6 +18,27 @@ class _firstTabState extends State<firstTab> {
 
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
+
+  Future customerDetails() async{
+
+    try{
+      
+    await Future.delayed(Duration(seconds:1));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ConsumerDetails(email: _contoller1.text)));
+
+    
+    }on FirebaseAuthException catch(e){
+      print(e);
+        showDialog(context: context,
+        builder: (context){
+          return AlertDialog(
+            content: Text("Customer Doesn't Exist."),
+          );
+        }
+       ) ; 
+    }
+
+  }
 
  /*
  readDetails(cID){
@@ -77,17 +98,7 @@ class _firstTabState extends State<firstTab> {
             children: [
 
               
-            /*   Container(
-                alignment: Alignment.center,
-                child: Text("Please Enter a Valid Email.",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18
-                    
-                  ),
-                ),
-              ), */
+            
 
               SizedBox(height: 30,),
               
@@ -98,7 +109,7 @@ class _firstTabState extends State<firstTab> {
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     
-                      hintText: "Enter Consumer ID",
+                      hintText: "Enter email",
                       labelText: "Consumer Email",
                       
                     
@@ -158,12 +169,12 @@ class _firstTabState extends State<firstTab> {
                  
                 ),
 
-                Container(
+                /* Container(
                   child: Text('OR'),
-                ),
+                ), */
 
 
-                SizedBox(height: 30,),
+                /* SizedBox(height: 30,),
 
                  Material(
                   color: Color.fromARGB(255, 243, 118, 35),
@@ -197,7 +208,7 @@ class _firstTabState extends State<firstTab> {
                      
                     ),
                   ),
-                ),
+                ), */
                 
 
 

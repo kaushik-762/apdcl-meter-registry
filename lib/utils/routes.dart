@@ -4,4 +4,5 @@ class MyRoutes{
   static String signRoute="/SignUp";
   static String forgotpwRoute="/ForgotPw";
   static String addRoute= "/home";
+  static String customerRoute="/customer";
 }
