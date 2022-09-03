@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:apdcl_meter_registry_system/model/consumers.dart';
 import 'package:apdcl_meter_registry_system/widgets/boxes.dart';
-import 'package:hive_flutter/adapters.dart';
+//import 'package:hive_flutter/adapters.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -36,6 +36,7 @@ class _secondTabState extends State<secondTab> {
   
   
   void disposal(){
+    _consumerIDController.dispose();
     _nameController.dispose();
     _emailController.dispose();
     _metermakeController.dispose();
@@ -46,7 +47,7 @@ class _secondTabState extends State<secondTab> {
     _date.dispose();
 
 
-     Hive.box('consumers').close();
+     //Hive.box('consumers').close();
     
 
     super.dispose();
@@ -73,7 +74,7 @@ String? value2;
   
 
   //add Customer
- /*  Future addCustomer(String name,String email,String metermake,String phase,String pincode,String date ) async{
+ Future addCustomer(String consumerid,String name,String email,String metermake,String phase,String pincode,String date ) async{
     
    if(name!='' && email!='' && metermake!='' && phase!='' && pincode!='' && date!=''){
     setState(() {
@@ -81,7 +82,8 @@ String? value2;
        });
 
     await FirebaseFirestore.instance.collection('consumers').add({
-      
+
+      'Consumer id': consumerid,
       'Consumer Name': name,
       'Consumer Email': email,
       'Meter Make':metermake,
@@ -108,11 +110,11 @@ else{
 
   }
   
-  } */
+  } 
 
 //Create
- Future addCustomer(String cID,String cName,String email,String metermake,String phaseType,String pin,String date)async{
-    if(cID!='' && cName!='' && email!='' && metermake!='' && phaseType!='' && pin!='' && date!=''){
+ /*Future addCustomer(String cID,String cName,String email,String metermake,String phaseType,String pin,String date)async{
+    if(cID!=null && cName!=null && email!=null && metermake!=null && phaseType!=null && pin!=null && date!=null){
       //for done icon
       setState(() {
         changedButton=true;
@@ -145,7 +147,7 @@ else{
 
     }
 
-  }
+  }   */
 
   
 
@@ -210,8 +212,8 @@ else{
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     
-                      hintText: "Enter Consumer Name",
-                      labelText: "Consumer Name",
+                      hintText: "Consumer ID",
+                      labelText: "Allot an ID",
                       
                     
                     ),
@@ -401,7 +403,7 @@ else{
                     _emailController.text.trim(),
                     _metermakeController.text.trim(),
                     _phaseController.text.trim(),
-                 _pincodeController.text.trim(),
+                    _pincodeController.text.trim(),
                     _date.text.trim(),
                    ),
                       

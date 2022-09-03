@@ -1,3 +1,4 @@
+import 'package:apdcl_meter_registry_system/pages/consumerDetails.dart';
 import 'package:apdcl_meter_registry_system/widgets/boxes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,36 +11,57 @@ class firstTab extends StatefulWidget {
 }
 
 class _firstTabState extends State<firstTab> {
+
+  TextEditingController _contoller1=TextEditingController();
   
   
 
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
 
- 
+ /*
  readDetails(cID){
 
    final myBox=Boxes.getConsumers();
    final myConsumers=myBox.get(cID);
-   myBox.values;
-   myBox.keys;
+  // myBox.values;
+  // myBox.keys;
    showDialog(context: context, 
-   builder: (context){
-    return AlertDialog(
+   builder: (myConsumers){
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            Text('Consumer ID: '+myConsumers!.cID),
+            SizedBox(height: 10,),
 
-      content: Text(''
-        
+            Text('Consumer Name: '+myConsumers!.cName),
+            SizedBox(height: 10,),
 
-      
+            Text('Consumer Email: '+myConsumers!.email),
+            SizedBox(height: 10,),
+
+            Text('Meter Make: '+myConsumers!.metermake),
+            SizedBox(height: 10,),
+
+            Text('Phase Type: '+myConsumers!.phaseType),
+            SizedBox(height: 10,),
+
+            Text('Pin Code: '+myConsumers!.pin),
+            SizedBox(height: 10,),
+
+            Text('Allotment Date: '+myConsumers!.date),
+            SizedBox(height: 10,),
+          ],
+        ),
       ),
-
     );
 
 
    }); 
    
    
- }   
+ }   */
   
   @override
   Widget build(BuildContext context) {
@@ -70,13 +92,14 @@ class _firstTabState extends State<firstTab> {
               SizedBox(height: 30,),
               
               TextFormField(
+                controller: _contoller1,
                     
                     decoration: InputDecoration(
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     
                       hintText: "Enter Consumer ID",
-                      labelText: "Consumer ID",
+                      labelText: "Consumer Email",
                       
                     
                     ),
@@ -97,7 +120,12 @@ class _firstTabState extends State<firstTab> {
                   borderRadius: BorderRadius.circular(changedButton?50:8),
                   child: InkWell(
                     splashColor: Color.fromARGB(255, 131, 252, 1),
-                   //onTap: ()=>getDetails(context),
+                   onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context)=>ConsumerDetails(email: _contoller1.text)
+                      )
+                      );
+                   },
                       
                     
                     child: AnimatedContainer(
