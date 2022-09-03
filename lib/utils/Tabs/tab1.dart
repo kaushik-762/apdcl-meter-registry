@@ -21,6 +21,8 @@ class _firstTabState extends State<firstTab> {
 
   Future customerDetails() async{
 
+    if(_contoller1!=''){
+
     try{
       
     await Future.delayed(Duration(seconds:1));
@@ -36,6 +38,16 @@ class _firstTabState extends State<firstTab> {
           );
         }
        ) ; 
+    }
+    }
+    else{
+      showDialog(context: context, 
+      builder: (context){
+        return AlertDialog(
+          content:Text('Please enter an Email'),
+
+        );
+      });
     }
 
   }
