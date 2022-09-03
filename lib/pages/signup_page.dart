@@ -95,7 +95,7 @@ class _SignUpState extends State<SignUp> {
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
               horizontal:25,
-              vertical:0,
+              vertical:10,
             ),
 
             child: Column(
@@ -139,9 +139,10 @@ class _SignUpState extends State<SignUp> {
                       TextFormField(
                     controller: _nameController,
                     decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     prefixIcon: Icon(
-                     Icons.email,
+                     Icons.face,
                      color: Color.fromARGB(255, 243, 118, 35),
                     ),
                       hintText: "Enter Username",
@@ -160,6 +161,7 @@ class _SignUpState extends State<SignUp> {
                   TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     prefixIcon: Icon(
                      Icons.email,
@@ -183,6 +185,7 @@ class _SignUpState extends State<SignUp> {
                     obscureText: true,
                     decoration: InputDecoration(
 
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                     contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     prefixIcon: Icon(
                      Icons.lock,
@@ -208,6 +211,7 @@ class _SignUpState extends State<SignUp> {
                     obscureText: true,
                     decoration: InputDecoration(
 
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                     contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     prefixIcon: Icon(
                      Icons.lock,

@@ -73,6 +73,7 @@ class _ForgotPwState extends State<ForgotPw> {
               TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     prefixIcon: Icon(
                      Icons.email,

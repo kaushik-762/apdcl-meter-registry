@@ -40,49 +40,9 @@ class _firstTabState extends State<firstTab> {
 
   }
 
- /*
- readDetails(cID){
+  
 
-   final myBox=Boxes.getConsumers();
-   final myConsumers=myBox.get(cID);
-  // myBox.values;
-  // myBox.keys;
-   showDialog(context: context, 
-   builder: (myConsumers){
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Text('Consumer ID: '+myConsumers!.cID),
-            SizedBox(height: 10,),
-
-            Text('Consumer Name: '+myConsumers!.cName),
-            SizedBox(height: 10,),
-
-            Text('Consumer Email: '+myConsumers!.email),
-            SizedBox(height: 10,),
-
-            Text('Meter Make: '+myConsumers!.metermake),
-            SizedBox(height: 10,),
-
-            Text('Phase Type: '+myConsumers!.phaseType),
-            SizedBox(height: 10,),
-
-            Text('Pin Code: '+myConsumers!.pin),
-            SizedBox(height: 10,),
-
-            Text('Allotment Date: '+myConsumers!.date),
-            SizedBox(height: 10,),
-          ],
-        ),
-      ),
-    );
-
-
-   }); 
-   
-   
- }   */
+  
   
   @override
   Widget build(BuildContext context) {

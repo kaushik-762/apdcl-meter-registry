@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
               horizontal:25,
-              vertical:0,
+              vertical:10,
             ),
             child: Column(
                
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                     controller: _emailController,
                     decoration: InputDecoration(
 
-                    //border: OutlineInputBorder(),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                     contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     prefixIcon: Icon(
                      Icons.email,
@@ -168,6 +168,10 @@ class _LoginPageState extends State<LoginPage> {
                   
                 ),
 
+                SizedBox(
+                  height: 10,
+                ),
+
                 
                 
                 TextFormField(
@@ -175,6 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: true,
                   decoration: InputDecoration(
                     //border: OutlineInputBorder(),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                     contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     prefixIcon: Icon(
                      Icons.lock,
