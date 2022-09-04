@@ -130,6 +130,16 @@ class ConsumerDetails extends StatelessWidget {
 
                           Text('Allotment Date: '+consumer1['Date']),
 
+
+                          SizedBox(
+                            height: 20,
+                          ),
+
+
+                           Text('Allotment By: '+consumer1['Alloted By']),
+
+
+
                           SizedBox(
                             height: 20,
                           ),

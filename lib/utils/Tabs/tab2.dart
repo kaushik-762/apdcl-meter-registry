@@ -33,6 +33,7 @@ class _secondTabState extends State<secondTab> {
   final _phaseController=TextEditingController();
   final _pincodeController=TextEditingController();
   final _date=TextEditingController();
+  final _empController=TextEditingController();
   
   
   void disposal(){
@@ -42,6 +43,7 @@ class _secondTabState extends State<secondTab> {
     _metermakeController.dispose();
     _phaseController.dispose();
     _pincodeController.dispose();
+   _empController.dispose();
    
 
     _date.dispose();
@@ -74,9 +76,9 @@ String? value2;
   
 
   //add Customer
- Future addCustomer(String consumerid,String name,String email,String metermake,String phase,String pincode,String date ) async{
+ Future addCustomer(String consumerid,String name,String email,String metermake,String phase,String pincode,String date,String emp ) async{
     
-   if(name!='' && email!='' && metermake!='' && phase!='' && pincode!='' && date!=''){
+   if(name!='' && email!='' && metermake!='' && phase!='' && pincode!='' && date!='' && emp!=''){
     setState(() {
         changedButton=true;
        });
@@ -90,6 +92,7 @@ String? value2;
       'Phase Type':phase,
       'Pin Code':pincode,
       'Date':date,
+      'Alloted By':emp,
     }
     );
     moveToAdd(context);
@@ -316,6 +319,9 @@ else{
                    
                   ),
 
+
+                  
+
                    SizedBox(height: 15,),
 
 
@@ -328,10 +334,14 @@ else{
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     
                       hintText: "YYYY/MM/DD",
-                      labelText: "Select Date",
+                      labelText: "Allotment Date",
                       
                     
                     ),
+
+                    
+
+                    
 
                     onTap: () async{
                       var pickedDate=await showDatePicker(
@@ -352,6 +362,30 @@ else{
                     },
                    
                    ),
+
+
+                   
+
+
+
+                  SizedBox(height: 15,),
+                   TextFormField(
+                     controller: _empController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    
+                      hintText: "Enter Employee Name",
+                      labelText: "Alloted By",
+                      
+                    
+                    ),
+                   
+                  ),
+
+
+                  
+
                   
 
                
@@ -372,6 +406,7 @@ else{
                     _phaseController.text.trim(),
                     _pincodeController.text.trim(),
                     _date.text.trim(),
+                    _empController.text.trim(),
                    ),
                       
                     
