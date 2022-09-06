@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 
 class ConsumerDetails extends StatelessWidget {
-  String email;
-    ConsumerDetails({required this.email});
+  String conId;
+    ConsumerDetails({required this.conId});
     Stream<QuerySnapshot>detailsofconsumer(BuildContext)async*{
-    yield* FirebaseFirestore.instance.collection('consumers').where('Consumer Email',isEqualTo:email).snapshots();
+    yield* FirebaseFirestore.instance.collection('consumers').where('Consumer id',isEqualTo:conId).snapshots();
       
   } 
   

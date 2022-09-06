@@ -33,6 +33,8 @@ class _SignUpState extends State<SignUp> {
     /* setState(() {
         changedButton=true;
       }); */
+
+    
       
       if(confirmPassword()){
         setState(() {

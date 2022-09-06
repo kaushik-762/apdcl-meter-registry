@@ -26,7 +26,7 @@ class _firstTabState extends State<firstTab> {
     try{
       
     await Future.delayed(Duration(seconds:1));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ConsumerDetails(email: _contoller1.text)));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ConsumerDetails(conId: _contoller1.text)));
 
     
     }on FirebaseAuthException catch(e){
@@ -81,8 +81,8 @@ class _firstTabState extends State<firstTab> {
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     
-                      hintText: "Enter email",
-                      labelText: "Consumer Email",
+                      hintText: "Enter Consumer ID",
+                      labelText: "Consumer ID",
                       
                     
                     ),
@@ -105,7 +105,7 @@ class _firstTabState extends State<firstTab> {
                     splashColor: Color.fromARGB(255, 131, 252, 1),
                    onTap: (){
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context)=>ConsumerDetails(email: _contoller1.text)
+                      builder: (context)=>ConsumerDetails(conId: _contoller1.text)
                       )
                       );
                    },
