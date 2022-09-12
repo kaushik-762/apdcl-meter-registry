@@ -25,24 +25,27 @@ class secondTab extends StatefulWidget {
 }
 
 class _secondTabState extends State<secondTab> {
+
+  
+  
   //text controllers
-  final _consumerIDController=TextEditingController();
-  final _nameController=TextEditingController();
-  final _emailController=TextEditingController();
+  final _meterController=TextEditingController();
+  final _locController=TextEditingController();
   final _metermakeController=TextEditingController();
   final _phaseController=TextEditingController();
-  final _pincodeController=TextEditingController();
+  final _typeController=TextEditingController();
+  final _rdController=TextEditingController();
+  
   final _date=TextEditingController();
   final _empController=TextEditingController();
   
   
   void disposal(){
-    _consumerIDController.dispose();
-    _nameController.dispose();
-    _emailController.dispose();
+    _meterController.dispose();
+    _locController.dispose();
     _metermakeController.dispose();
     _phaseController.dispose();
-    _pincodeController.dispose();
+    
    _empController.dispose();
    
 
@@ -63,34 +66,48 @@ class _secondTabState extends State<secondTab> {
 
   
   
-  String? value1;
+String? value1;
   List<String> phaseType=[
     "1","3"
   ];
 
 String? value2;
   List<String> meterMake=[
-    "x","y","z"
+    "Secure","Genus","LNT","x","y","z"
+  ];
+
+String? value3;
+  List<String> locId=[
+    "Dispur(001)","Ganeshguri(002)","SixMile(003)","Zoo Road(004)","Christian Basti(005)","Beltola(006)","Chandmari(007)","Khanapara(008)","Ulubari(009)","Silpukhuri(010)","Maligaon(011)"
+  ];
+
+String? value4;
+  List<String> type=[
+    "01,Single Phase","02,Triple Phase"
+  ];
+
+String? value5;
+  List<String> rdigit=[
+    "5","6","7","8"
   ];
 
   
 
   //add Customer
- Future addCustomer(String consumerid,String name,String email,String metermake,String phase,String pincode,String date,String emp ) async{
+ Future addCustomer(String meterno,String locid,String metermake,String phase,String date,String emp ) async{
     
-   if(name!='' && email!='' && metermake!='' && phase!='' && pincode!='' && date!='' && emp!=''){
+   if(locid!='' && metermake!='' && phase!='' && date!='' && emp!=''){
     setState(() {
         changedButton=true;
        });
 
     await FirebaseFirestore.instance.collection('consumers').add({
 
-      'Consumer id': consumerid,
-      'Consumer Name': name,
-      'Consumer Email': email,
+      'Consumer id': meterno,
+      
       'Meter Make':metermake,
       'Phase Type':phase,
-      'Pin Code':pincode,
+      
       'Date':date,
       'Alloted By':emp,
     }
@@ -163,62 +180,65 @@ else{
             children: [
 
               
-            /*   Container(
-                alignment: Alignment.center,
-                child: Text("Please Enter a Valid Email.",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18
-                    
-                  ),
-                ),
-              ), */
+            
 
               SizedBox(height: 30,),
              TextFormField(
-                    controller: _consumerIDController,
+                    controller: _meterController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     
-                      hintText: "Consumer ID",
-                      labelText: "Allot an ID",
+                      hintText: "Meter Number",
+                      labelText: "Meter Number",
                       
                     
                     ),
                    
                   ), 
 
-              SizedBox(height: 15,),
-             TextFormField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    
-                      hintText: "Enter Consumer Name",
-                      labelText: "Consumer Name",
-                      
-                    
-                    ),
-                   
-                  ), 
+              
 
-                   SizedBox(height: 15,),
-                   TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    
-                      hintText: "Enter Consumer Email",
-                      labelText: "Consumer Email",
+
+                  SizedBox(height: 15,),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    decoration:BoxDecoration(
+                        
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(10),
+                      border:Border.all(), 
+                        
+                        
                       
-                    
-                    ),
-                   
+                      ), 
+
+                      child: DropDownField(
+
+                      
+                       
+                        controller:_locController,
+                        
+                        
+                        hintText: 'Location ID',
+                        enabled:true,
+                        items: locId,
+                        onValueChanged: (value) {
+                          setState(() {
+                          
+                          this.value3=value;
+                          
+                          
+                        });
+                        },
+                        
+                        
+             
+                       
                   ),
+                    ),
+
+                   
 
                   
 
@@ -303,21 +323,85 @@ else{
                   ),
                    ),
 
-
-                  SizedBox(height: 15,),
-                   TextFormField(
-                     controller: _pincodeController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    
-                      hintText: "Input Pincode",
-                      labelText: "Pin Code",
+                   SizedBox(height: 15,),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    decoration:BoxDecoration(
+                        
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(10),
+                      border:Border.all(), 
+                        
+                        
                       
-                    
-                    ),
-                   
+                      ), 
+
+                      child: DropDownField(
+
+                      
+                       
+                        controller:_typeController,
+                        
+                        
+                        hintText: 'Type',
+                        enabled:true,
+                        items: type,
+                        onValueChanged: (value) {
+                          setState(() {
+                          
+                          this.value4=value;
+                          
+                          
+                        });
+                        },
+                        
+                        
+             
+                       
                   ),
+                    ),
+
+
+                    SizedBox(height: 15,),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                    decoration:BoxDecoration(
+                        
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(10),
+                      border:Border.all(), 
+                        
+                        
+                      
+                      ), 
+
+                      child: DropDownField(
+
+                      
+                       
+                        controller:_rdController,
+                        
+                        
+                        hintText: 'Reading Digit',
+                        enabled:true,
+                        items: rdigit,
+                        onValueChanged: (value) {
+                          setState(() {
+                          
+                          this.value5=value;
+                          
+                          
+                        });
+                        },
+                        
+                        
+             
+                       
+                  ),
+                    ),
+
+
+                  
 
 
                   
@@ -399,12 +483,12 @@ else{
                   child: InkWell(
                     splashColor: Color.fromARGB(255, 131, 252, 1),
                    onTap: ()=>addCustomer(
-                    _consumerIDController.text.trim(),
-                    _nameController.text.trim(),
-                    _emailController.text.trim(),
+                    _meterController.text.trim(),
+                    _locController.text.trim(),
+                    
                     _metermakeController.text.trim(),
                     _phaseController.text.trim(),
-                    _pincodeController.text.trim(),
+                    
                     _date.text.trim(),
                     _empController.text.trim(),
                    ),

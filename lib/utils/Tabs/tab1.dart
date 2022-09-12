@@ -141,46 +141,7 @@ class _firstTabState extends State<firstTab> {
                  
                 ),
 
-                /* Container(
-                  child: Text('OR'),
-                ), */
-
-
-                /* SizedBox(height: 30,),
-
-                 Material(
-                  color: Color.fromARGB(255, 243, 118, 35),
-                  borderRadius: BorderRadius.circular(changedButton?50:8),
-                  child: InkWell(
-                    splashColor: Color.fromARGB(255, 131, 252, 1),
-                   // onTap: ()=>Signin(context),
-                      
-                    
-                    child: AnimatedContainer(
-                      
-                      
-                      duration: Duration(seconds:1),
-                      height: 50,
-                      width: changedButton?50:130,
-                      
-                      alignment: Alignment.center,
-                      child: changedButton?Icon(
-                        Icons.done,
-                        color:Colors.white,
-                      )
-                      :Text("Scanner",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          
-                        ),
-                      ),
-                      
-                     
-                    ),
-                  ),
-                ), */
+                
                 
 
 
