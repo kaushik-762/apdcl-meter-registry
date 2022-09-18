@@ -40,6 +40,7 @@ dependencies:
   cloud_firestore: ^3.4.6
   dropdownfield2: ^1.0.7
   qr_flutter: ^4.0.0
+  flutter_barcode_scanner:
  
 
   hive: ^2.2.3

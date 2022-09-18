@@ -11,10 +11,10 @@ class ConsumerDetails extends StatelessWidget {
     Stream<QuerySnapshot>detailsofconsumer(BuildContext)async*{
     yield* FirebaseFirestore.instance.collection('consumers').where('Consumer id',isEqualTo:conId).snapshots();
       
-  } 
+    } 
   
   
-  final user = FirebaseAuth.instance.currentUser!.displayName;
+  
  
 
 

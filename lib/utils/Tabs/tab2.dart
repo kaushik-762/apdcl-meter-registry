@@ -1,8 +1,10 @@
 import 'dart:ffi';
 
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter/services.dart';
 
 
-//import 'package:hive_flutter/adapters.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -36,8 +38,17 @@ class _secondTabState extends State<secondTab> {
   final _typeController=TextEditingController();
   final _rdController=TextEditingController();
   
-  final _date=TextEditingController();
-  final _empController=TextEditingController();
+  
+  TextEditingController _empController=TextEditingController();
+
+
+  final userid=FirebaseAuth.instance.currentUser!.uid;
+
+  String _date =new DateTime.now().toString(); 
+  
+  
+  late String qrcode;
+ 
   
   
   void disposal(){
@@ -49,7 +60,7 @@ class _secondTabState extends State<secondTab> {
    _empController.dispose();
    
 
-    _date.dispose();
+    
 
 
      //Hive.box('consumers').close();
@@ -90,6 +101,22 @@ String? value5;
   List<String> rdigit=[
     "5","6","7","8"
   ];
+
+  //Scan
+  Future<void> scanQRCode() async{
+    try{
+      final qrcode=await FlutterBarcodeScanner.scanBarcode('#ff6666', 'Back', true, ScanMode.BARCODE);
+    if(!mounted) return ;
+    setState(() {
+      this.qrcode=qrcode;
+    });
+    }on PlatformException{
+      qrcode='Failed';
+    }
+
+
+
+  }
 
   
 
@@ -406,7 +433,7 @@ else{
 
                   
 
-                   SizedBox(height: 15,),
+                   /* SizedBox(height: 15,),
 
 
                   TextFormField(
@@ -445,7 +472,7 @@ else{
                       
                     },
                    
-                   ),
+                   ), */
 
 
                    
@@ -468,7 +495,40 @@ else{
                   ),
 
 
-                  
+                 SizedBox(height: 20,),
+
+                 Material(
+                  color: Color.fromARGB(255, 243, 118, 35),
+                  borderRadius: BorderRadius.circular(changedButton?50:8),
+                  child: InkWell(
+                    splashColor: Color.fromARGB(255, 131, 252, 1),
+                   onTap: ()=>scanQRCode(),
+                      
+                    
+                    child: AnimatedContainer(
+                      
+                      duration: Duration(seconds:1),
+                      height: 50,
+                      width: changedButton?50:130,
+                      
+                      alignment: Alignment.center,
+                      child: changedButton?Icon(
+                        Icons.done,
+                        color:Colors.white,
+                      )
+                      :Text("Scan",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          
+                        ),
+                      ),
+                      
+                     
+                    ),
+                  ),
+                ), 
 
                   
 
@@ -489,7 +549,7 @@ else{
                     _metermakeController.text.trim(),
                     _phaseController.text.trim(),
                     
-                    _date.text.trim(),
+                    _date,
                     _empController.text.trim(),
                    ),
                       
@@ -530,6 +590,8 @@ else{
       ),
 
     );
+
+    
 
     
     
