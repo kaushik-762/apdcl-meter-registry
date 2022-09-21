@@ -39,10 +39,10 @@ class _secondTabState extends State<secondTab> {
   final _rdController=TextEditingController();
   
   
-  TextEditingController _empController=TextEditingController();
+  //final _empController=TextEditingController();
 
-
-  final userE=FirebaseAuth.instance.currentUser!.email;
+  String userN='';
+  String userE=FirebaseAuth.instance.currentUser!.email.toString();
 
   String _date =new DateTime.now().toString(); 
   
@@ -57,15 +57,7 @@ class _secondTabState extends State<secondTab> {
     _metermakeController.dispose();
     _phaseController.dispose();
     
-   _empController.dispose();
-   
-
-    
-
-
-     //Hive.box('consumers').close();
-    
-
+    //_empController.dispose();
     super.dispose();
   }
 
@@ -121,22 +113,24 @@ String? value5;
   
 
   //add Customer
- Future addCustomer(String meterno,String locid,String metermake,String phase,String date,String emp ) async{
+ Future addCustomer(String meterno,String locid,String metermake,String phase,String type,String rdigit,String dateS,String name ) async{
     
-   if(locid!='' && metermake!='' && phase!='' && date!='' && emp!=''){
+   if(meterno!='' && locid!='' && metermake!='' && phase!='' && type!='' && rdigit!=''){
     setState(() {
         changedButton=true;
        });
 
     await FirebaseFirestore.instance.collection('consumers').add({
 
-      'Consumer id': meterno,
-      
+      'Meter Number': meterno,
+      'Location ID': locid,
       'Meter Make':metermake,
       'Phase Type':phase,
+      'Type': type,
+      'Reading Digit': rdigit,
       
-      'Date':date,
-      'Alloted By':emp,
+      'Allotment Date':dateS,
+      'Allotted By':name,
     }
     );
     moveToAdd(context);
@@ -207,6 +201,16 @@ else{
               child: CircularProgressIndicator(),
             );
           }
+          else{
+            snapshot.data!.docs.map((user1){
+                userN=user1['Name'];
+            } ,
+            ); 
+
+            
+           
+        
+          
           return SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 30,vertical:0),
             
@@ -489,7 +493,7 @@ else{
 
 
 
-                      SizedBox(height: 15,),
+                     /*  SizedBox(height: 15,),
                        TextFormField(
                          controller: _empController,
                         decoration: InputDecoration(
@@ -502,7 +506,7 @@ else{
                         
                         ),
                        
-                      ),
+                      ), */
 
 
                      /* SizedBox(height: 20,),
@@ -558,9 +562,10 @@ else{
                         
                         _metermakeController.text.trim(),
                         _phaseController.text.trim(),
-                        
+                        _typeController.text.trim(),
+                        _rdController.text.trim(),
                         _date,
-                        _empController.text.trim(),
+                         userE,
                        ),
                           
                         
@@ -598,6 +603,7 @@ else{
               ),
            ),
           );
+        }
         }
       ),
 

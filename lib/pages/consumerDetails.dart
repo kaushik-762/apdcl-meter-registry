@@ -9,7 +9,7 @@ class ConsumerDetails extends StatelessWidget {
   String conId;
     ConsumerDetails({required this.conId});
     Stream<QuerySnapshot>detailsofconsumer(BuildContext)async*{
-    yield* FirebaseFirestore.instance.collection('consumers').where('Consumer id',isEqualTo:conId).snapshots();
+    yield* FirebaseFirestore.instance.collection('consumers').where('Meter Number',isEqualTo:conId).snapshots();
       
     } 
   
@@ -93,24 +93,18 @@ class ConsumerDetails extends StatelessWidget {
                           SizedBox(
                             height: 30,
                           ),
-                          Text('Consumer ID: '+consumer1['Consumer id']),
+                          Text('Meter Number: '+consumer1['Meter Number']),
 
                           SizedBox(
                             height: 20,
                           ),
 
-                          Text('Consumer Name: '+consumer1['Consumer Name']),
+                          Text('Location ID: '+consumer1['Location ID']),
 
                           SizedBox(
                             height: 20,
                           ),
 
-
-                          Text('Consumer Email: '+consumer1['Consumer Email']),
-
-                          SizedBox(
-                            height: 20,
-                          ),
 
                           Text('Meter Make: '+consumer1['Meter Make']),
 
@@ -124,13 +118,19 @@ class ConsumerDetails extends StatelessWidget {
                             height: 20,
                           ),
 
-                          Text('Pincode: '+consumer1['Pin Code']),
+                          Text('Type: '+consumer1['Type']),
 
                           SizedBox(
                             height: 20,
                           ),
 
-                          Text('Allotment Date: '+consumer1['Date']),
+                          Text('Reading Digit: '+consumer1['Reading Digit']),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          Text('Allotment Date: '+consumer1['Allotment Date']),
 
 
                           SizedBox(
@@ -138,7 +138,7 @@ class ConsumerDetails extends StatelessWidget {
                           ),
 
 
-                           Text('Allotment By: '+consumer1['Alloted By']),
+                           Text('Allotted By: '+consumer1['Allotted By']),
 
 
 
