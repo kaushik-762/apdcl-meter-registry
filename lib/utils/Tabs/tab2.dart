@@ -42,7 +42,7 @@ class _secondTabState extends State<secondTab> {
   TextEditingController _empController=TextEditingController();
 
 
-  final userid=FirebaseAuth.instance.currentUser!.uid;
+  final userE=FirebaseAuth.instance.currentUser!.email;
 
   String _date =new DateTime.now().toString(); 
   
@@ -199,394 +199,406 @@ else{
       return Scaffold(
       backgroundColor: Color.fromARGB(255, 98, 125, 242),
 
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 30,vertical:0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              
+      body: StreamBuilder(
+        stream:FirebaseFirestore.instance.collection('consumers').where('Email',isEqualTo:userE).snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if(!snapshot.hasData){
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 30,vertical:0),
             
-
-              SizedBox(height: 30,),
-             TextFormField(
-                    controller: _meterController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    
-                      hintText: "Meter Number",
-                      labelText: "Meter Number",
-                      
-                    
-                    ),
-                   
-                  ), 
-
-              
-
-
-                  SizedBox(height: 15,),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    decoration:BoxDecoration(
-                        
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
-                      border:Border.all(), 
-                        
-                        
-                      
-                      ), 
-
-                      child: DropDownField(
-
-                      
-                       
-                        controller:_locController,
-                        
-                        
-                        hintText: 'Location ID',
-                        enabled:true,
-                        items: locId,
-                        onValueChanged: (value) {
-                          setState(() {
-                          
-                          this.value3=value;
-                          
-                          
-                        });
-                        },
-                        
-                        
-             
-                       
-                  ),
-                    ),
-
-                   
-
-                  
-
-
-
-                 SizedBox(height: 15,),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    decoration:BoxDecoration(
-                        
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
-                      border:Border.all(), 
-                        
-                        
-                      
-                      ), 
-
-                      child: DropDownField(
-
-                      
-                       
-                        controller:_metermakeController,
-                        
-                        
-                        hintText: 'Meter Make',
-                        enabled:true,
-                        items: meterMake,
-                        onValueChanged: (value) {
-                          setState(() {
-                          
-                          this.value2=value;
-                          
-                          
-                        });
-                        },
-                        
-                        
-             
-                       
-                  ),
-                    ),
-                  
-                   
-              
-
-
-                  SizedBox(height: 15,),
-                   Container(
-                    padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    decoration:BoxDecoration(
-                        
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
-                      border:Border.all(), 
-                        
-                        
-                      
-                      ), 
-                     child: DropDownField(
-
-                      
-                       
-                        controller:_phaseController,
-                        
-                        
-                        hintText: 'Phase Type',
-                        enabled:true,
-                        items: phaseType,
-                        onValueChanged: (value) {
-                          setState(() {
-                          
-                          this.value1=value;
-                          
-                          
-                        });
-                        },
-                        
-                        
-             
-                       
-                  ),
-                   ),
-
-                   SizedBox(height: 15,),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    decoration:BoxDecoration(
-                        
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
-                      border:Border.all(), 
-                        
-                        
-                      
-                      ), 
-
-                      child: DropDownField(
-
-                      
-                       
-                        controller:_typeController,
-                        
-                        
-                        hintText: 'Type',
-                        enabled:true,
-                        items: type,
-                        onValueChanged: (value) {
-                          setState(() {
-                          
-                          this.value4=value;
-                          
-                          
-                        });
-                        },
-                        
-                        
-             
-                       
-                  ),
-                    ),
-
-
-                    SizedBox(height: 15,),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    decoration:BoxDecoration(
-                        
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
-                      border:Border.all(), 
-                        
-                        
-                      
-                      ), 
-
-                      child: DropDownField(
-
-                      
-                       
-                        controller:_rdController,
-                        
-                        
-                        hintText: 'Reading Digit',
-                        enabled:true,
-                        items: rdigit,
-                        onValueChanged: (value) {
-                          setState(() {
-                          
-                          this.value5=value;
-                          
-                          
-                        });
-                        },
-                        
-                        
-             
-                       
-                  ),
-                    ),
-
-
-                  
-
-
-                  
-
-                   /* SizedBox(height: 15,),
-
-
-                  TextFormField(
-                    controller: _date,
-                    
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.calendar_today_rounded),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    
-                      hintText: "YYYY/MM/DD",
-                      labelText: "Allotment Date",
-                      
-                    
-                    ),
-
-                    
-
-                    
-
-                    onTap: () async{
-                      var pickedDate=await showDatePicker(
-                        context: context, 
-                        initialDate:DateTime.now(), 
-                        firstDate: DateTime(2000), 
-                        lastDate: DateTime(2100)
-
-                        
-                        );
-
-                        if(pickedDate!=null){
-                          setState(() {
-                             _date.text= DateFormat('yyyy-MM-dd').format(pickedDate);
-                          });
-                        }
-                      
-                    },
-                   
-                   ), */
-
-
-                   
-
-
-
-                  SizedBox(height: 15,),
-                   TextFormField(
-                     controller: _empController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
-                    
-                      hintText: "Enter Employee Name",
-                      labelText: "Alloted By",
-                      
-                    
-                    ),
-                   
-                  ),
-
-
-                 SizedBox(height: 20,),
-
-                 Material(
-                  color: Color.fromARGB(255, 243, 118, 35),
-                  borderRadius: BorderRadius.circular(changedButton?50:8),
-                  child: InkWell(
-                    splashColor: Color.fromARGB(255, 131, 252, 1),
-                   onTap: ()=>scanQRCode(),
-                      
-                    
-                    child: AnimatedContainer(
-                      
-                      duration: Duration(seconds:1),
-                      height: 50,
-                      width: changedButton?50:130,
-                      
-                      alignment: Alignment.center,
-                      child: changedButton?Icon(
-                        Icons.done,
-                        color:Colors.white,
-                      )
-                      :Text("Scan",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          
-                        ),
-                      ),
-                      
-                     
-                    ),
-                  ),
-                ), 
-
-                  
-
+            child: Center(
                
-                   
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
 
-                SizedBox(height: 20,),
+                  
+                        
 
-                 Material(
-                  color: Color.fromARGB(255, 243, 118, 35),
-                  borderRadius: BorderRadius.circular(changedButton?50:8),
-                  child: InkWell(
-                    splashColor: Color.fromARGB(255, 131, 252, 1),
-                   onTap: ()=>addCustomer(
-                    _meterController.text.trim(),
-                    _locController.text.trim(),
-                    
-                    _metermakeController.text.trim(),
-                    _phaseController.text.trim(),
-                    
-                    _date,
-                    _empController.text.trim(),
-                   ),
-                      
-                    
-                    child: AnimatedContainer(
-                      
-                      duration: Duration(seconds:1),
-                      height: 50,
-                      width: changedButton?50:130,
-                      
-                      alignment: Alignment.center,
-                      child: changedButton?Icon(
-                        Icons.done,
-                        color:Colors.white,
-                      )
-                      :Text("Submit",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                  SizedBox(height: 30,),
+                 TextFormField(
+                        controller: _meterController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                          contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                        
+                          hintText: "Meter Number",
+                          labelText: "Meter Number",
                           
+                        
+                        ),
+                       
+                      ), 
+
+                  
+
+
+                      SizedBox(height: 15,),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                        decoration:BoxDecoration(
+                            
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10),
+                          border:Border.all(), 
+                            
+                            
+                          
+                          ), 
+
+                          child: DropDownField(
+
+                          
+                           
+                            controller:_locController,
+                            
+                            
+                            hintText: 'Location ID',
+                            enabled:true,
+                            items: locId,
+                            onValueChanged: (value) {
+                              setState(() {
+                              
+                              this.value3=value;
+                              
+                              
+                            });
+                            },
+                            
+                            
+                 
+                           
+                      ),
+                        ),
+
+                       
+
+                      
+
+
+
+                     SizedBox(height: 15,),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                        decoration:BoxDecoration(
+                            
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10),
+                          border:Border.all(), 
+                            
+                            
+                          
+                          ), 
+
+                          child: DropDownField(
+
+                          
+                           
+                            controller:_metermakeController,
+                            
+                            
+                            hintText: 'Meter Make',
+                            enabled:true,
+                            items: meterMake,
+                            onValueChanged: (value) {
+                              setState(() {
+                              
+                              this.value2=value;
+                              
+                              
+                            });
+                            },
+                            
+                            
+                 
+                           
+                      ),
+                        ),
+                      
+                       
+                  
+
+
+                      SizedBox(height: 15,),
+                       Container(
+                        padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                        decoration:BoxDecoration(
+                            
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10),
+                          border:Border.all(), 
+                            
+                            
+                          
+                          ), 
+                         child: DropDownField(
+
+                          
+                           
+                            controller:_phaseController,
+                            
+                            
+                            hintText: 'Phase Type',
+                            enabled:true,
+                            items: phaseType,
+                            onValueChanged: (value) {
+                              setState(() {
+                              
+                              this.value1=value;
+                              
+                              
+                            });
+                            },
+                            
+                            
+                 
+                           
+                      ),
+                       ),
+
+                       SizedBox(height: 15,),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                        decoration:BoxDecoration(
+                            
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10),
+                          border:Border.all(), 
+                            
+                            
+                          
+                          ), 
+
+                          child: DropDownField(
+
+                          
+                           
+                            controller:_typeController,
+                            
+                            
+                            hintText: 'Type',
+                            enabled:true,
+                            items: type,
+                            onValueChanged: (value) {
+                              setState(() {
+                              
+                              this.value4=value;
+                              
+                              
+                            });
+                            },
+                            
+                            
+                 
+                           
+                      ),
+                        ),
+
+
+                        SizedBox(height: 15,),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                        decoration:BoxDecoration(
+                            
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10),
+                          border:Border.all(), 
+                            
+                            
+                          
+                          ), 
+
+                          child: DropDownField(
+
+                          
+                           
+                            controller:_rdController,
+                            
+                            
+                            hintText: 'Reading Digit',
+                            enabled:true,
+                            items: rdigit,
+                            onValueChanged: (value) {
+                              setState(() {
+                              
+                              this.value5=value;
+                              
+                              
+                            });
+                            },
+                            
+                            
+                 
+                           
+                      ),
+                        ),
+
+
+                      
+
+
+                      
+
+                       /* SizedBox(height: 15,),
+
+
+                      TextFormField(
+                        controller: _date,
+                        
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.calendar_today_rounded),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                          contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                        
+                          hintText: "YYYY/MM/DD",
+                          labelText: "Allotment Date",
+                          
+                        
+                        ),
+
+                        
+
+                        
+
+                        onTap: () async{
+                          var pickedDate=await showDatePicker(
+                            context: context, 
+                            initialDate:DateTime.now(), 
+                            firstDate: DateTime(2000), 
+                            lastDate: DateTime(2100)
+
+                            
+                            );
+
+                            if(pickedDate!=null){
+                              setState(() {
+                                 _date.text= DateFormat('yyyy-MM-dd').format(pickedDate);
+                              });
+                            }
+                          
+                        },
+                       
+                       ), */
+
+
+                       
+
+
+
+                      SizedBox(height: 15,),
+                       TextFormField(
+                         controller: _empController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                          contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
+                        
+                          hintText: "Enter Employee Name",
+                          labelText: "Alloted By",
+                          
+                        
+                        ),
+                       
+                      ),
+
+
+                     /* SizedBox(height: 20,),
+
+                     Material(
+                      color: Color.fromARGB(255, 243, 118, 35),
+                      borderRadius: BorderRadius.circular(changedButton?50:8),
+                      child: InkWell(
+                        splashColor: Color.fromARGB(255, 131, 252, 1),
+                       onTap: ()=>scanQRCode(),
+                          
+                        
+                        child: AnimatedContainer(
+                          
+                          duration: Duration(seconds:1),
+                          height: 50,
+                          width: changedButton?50:130,
+                          
+                          alignment: Alignment.center,
+                          child: changedButton?Icon(
+                            Icons.done,
+                            color:Colors.white,
+                          )
+                          :Text("Scan",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              
+                            ),
+                          ),
+                          
+                         
                         ),
                       ),
+                    ),  */
+
                       
-                     
+
+                   
+                       
+
+                    SizedBox(height: 20,),
+
+                     Material(
+                      color: Color.fromARGB(255, 243, 118, 35),
+                      borderRadius: BorderRadius.circular(changedButton?50:8),
+                      child: InkWell(
+                        splashColor: Color.fromARGB(255, 131, 252, 1),
+                       onTap: ()=>addCustomer(
+                        _meterController.text.trim(),
+                        _locController.text.trim(),
+                        
+                        _metermakeController.text.trim(),
+                        _phaseController.text.trim(),
+                        
+                        _date,
+                        _empController.text.trim(),
+                       ),
+                          
+                        
+                        child: AnimatedContainer(
+                          
+                          duration: Duration(seconds:1),
+                          height: 50,
+                          width: changedButton?50:130,
+                          
+                          alignment: Alignment.center,
+                          child: changedButton?Icon(
+                            Icons.done,
+                            color:Colors.white,
+                          )
+                          :Text("Submit",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              
+                            ),
+                          ),
+                          
+                         
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                
+                    
 
-              
+                  
 
 
-              
-            ],
-          ),
-       ),
+                  
+                ],
+              ),
+           ),
+          );
+        }
       ),
 
     );
