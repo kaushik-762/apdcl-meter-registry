@@ -194,7 +194,7 @@ else{
       backgroundColor: Color.fromARGB(255, 98, 125, 242),
 
       body: StreamBuilder(
-        stream:FirebaseFirestore.instance.collection('consumers').where('Email',isEqualTo:userE).snapshots(),
+        stream:FirebaseFirestore.instance.collection('users').where('Email',isEqualTo:userE).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if(!snapshot.hasData){
             return Center(
@@ -206,6 +206,8 @@ else{
                 userN=user1['Name'];
             } ,
             ); 
+
+           // DocumentSnapshot userr=snapshot.data!.docs[];
 
             
            
@@ -565,7 +567,7 @@ else{
                         _typeController.text.trim(),
                         _rdController.text.trim(),
                         _date,
-                         userE,
+                         userN,
                        ),
                           
                         

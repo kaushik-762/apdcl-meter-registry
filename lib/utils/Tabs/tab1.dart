@@ -18,6 +18,7 @@ class _firstTabState extends State<firstTab> {
 
   bool changedButton=false;
   final _formKey=GlobalKey<FormState>();
+  
 
   Future customerDetails() async{
 
@@ -81,8 +82,8 @@ class _firstTabState extends State<firstTab> {
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(horizontal:16, vertical:10),
                     
-                      hintText: "Enter Consumer ID",
-                      labelText: "Consumer ID",
+                      hintText: "Enter Meter Number",
+                      labelText: "Meter Number",
                       
                     
                     ),

@@ -101,12 +101,12 @@ class _HomePageState extends State<HomePage> {
 
                          Tab(
                           icon: Icon(Icons.person),
-                          text: 'Consumer Enquiry',
+                          text: 'Meter Enquiry',
                         ),
                         
                         Tab(
                           icon: Icon(Icons.add),
-                          text: 'Add Consumer',
+                          text: 'Allot new Meter',
                         ),  
 
                       ]

@@ -40,7 +40,7 @@ class _ConsumerAddState extends State<ConsumerAdd> {
                   ),
 
                   Container(
-                    child: Text('Consumer Added Successfully!',
+                    child: Text('Meter Allotment Successful!',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.normal,
