@@ -15,7 +15,20 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //final user=FirebaseAuth.instance.currentUser!;
+  String userN='';
 
+  _fetch()async{
+    final firebaseUser=await FirebaseAuth.instance.currentUser!;
+    if(firebaseUser!=null)
+    // ignore: curly_braces_in_flow_control_structures
+    await FirebaseFirestore.instance
+     .collection('users')
+     .doc(firebaseUser.uid)
+     .get()
+     .then((ds) {
+        userN=ds.data()!['Name'];
+     });
+  }
  
   @override
   Widget build(BuildContext context) {
@@ -129,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                         
                         children: [
                           firstTab(),
-                          secondTab(),
+                          secondTab(userN: '',),
                           
                           
                         ],

@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter/services.dart';
@@ -19,8 +20,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class secondTab extends StatefulWidget {
-
-  const secondTab({Key? key}) : super(key: key);
+  final String userN;
+  const secondTab({required this.userN});
 
   @override
   State<secondTab> createState() => _secondTabState();
@@ -41,13 +42,17 @@ class _secondTabState extends State<secondTab> {
   
   //final _empController=TextEditingController();
 
-  String userN='';
+  
   String userE=FirebaseAuth.instance.currentUser!.email.toString();
 
   String _date =new DateTime.now().toString(); 
   
   
   late String qrcode;
+  
+  
+  
+ 
  
   
   
@@ -95,7 +100,7 @@ String? value5;
   ];
 
   //Scan
-  Future<void> scanQRCode() async{
+/*   Future<void> scanQRCode() async{
     try{
       final qrcode=await FlutterBarcodeScanner.scanBarcode('#ff6666', 'Back', true, ScanMode.BARCODE);
     if(!mounted) return ;
@@ -105,10 +110,23 @@ String? value5;
     }on PlatformException{
       qrcode='Failed';
     }
+  } */
 
+ /*  _fetch()async{
+    final firebaseUser=await FirebaseAuth.instance.currentUser!;
+    if(firebaseUser!=null)
+    // ignore: curly_braces_in_flow_control_structures
+    await FirebaseFirestore.instance
+     .collection('users')
+     .doc(firebaseUser.uid)
+     .get()
+     .then((ds) {
+        userN=ds['Name'];
+     });
+  } */
 
-
-  }
+  
+  
 
   
 
@@ -174,6 +192,8 @@ else{
   @override
   Widget build(BuildContext context) {
 
+    String username=widget.userN;
+
       DropdownMenuItem<String> buildMenuItem(String item)=>DropdownMenuItem(
       value: item,
       child: Text(
@@ -202,12 +222,12 @@ else{
             );
           }
           else{
-            snapshot.data!.docs.map((user1){
+            /* snapshot.data!.docs.map((user1){
                 userN=user1['Name'];
             } ,
-            ); 
+            );  */
 
-           // DocumentSnapshot userr=snapshot.data!.docs[];
+           
 
             
            
@@ -567,7 +587,7 @@ else{
                         _typeController.text.trim(),
                         _rdController.text.trim(),
                         _date,
-                         userN,
+                         userE,
                        ),
                           
                         
