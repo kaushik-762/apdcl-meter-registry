@@ -213,27 +213,7 @@ else{
       return Scaffold(
       backgroundColor: Color.fromARGB(255, 98, 125, 242),
 
-      body: StreamBuilder(
-        stream:FirebaseFirestore.instance.collection('users').where('Email',isEqualTo:userE).snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if(!snapshot.hasData){
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          else{
-            /* snapshot.data!.docs.map((user1){
-                userN=user1['Name'];
-            } ,
-            );  */
-
-           
-
-            
-           
-        
-          
-          return SingleChildScrollView(
+      body: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 30,vertical:0),
             
             child: Center(
@@ -624,10 +604,10 @@ else{
                 ],
               ),
            ),
-          );
-        }
-        }
-      ),
+          )
+        
+        
+      
 
     );
 

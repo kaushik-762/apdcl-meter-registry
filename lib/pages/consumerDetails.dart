@@ -49,7 +49,7 @@ class ConsumerDetails extends StatelessWidget {
               child: CircularProgressIndicator(),
 
             );
-          }
+          } 
 
             return new ListView.builder(
             itemCount: snapshot.data.docs.length,
